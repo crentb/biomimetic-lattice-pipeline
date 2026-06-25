@@ -1,0 +1,48 @@
+# --- Python bytecode / build artifacts ------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.whl
+
+# --- Virtual environments --------------------------------------------------
+.venv/
+venv/
+env/
+
+# --- Tooling caches --------------------------------------------------------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Pipeline data / outputs (large; regenerated, never committed) ---------
+# Per-run artifacts (CAD, meshes, FEA fields, metrics, reports) are written
+# under runs/ and are reproducible from the code + inputs, so they stay out
+# of version control.
+runs/
+*.msh
+*.vtk
+*.vtu
+*.xdmf
+*.h5
+
+# --- LaTeX auxiliary files (keep .tex/.pdf where intentionally committed) --
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.out
+*.toc
+
+# --- OS / editor cruft -----------------------------------------------------
+.DS_Store
+*.swp
+.idea/
+.vscode/

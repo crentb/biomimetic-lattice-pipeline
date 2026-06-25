@@ -1,0 +1,108 @@
+# =============================================================================
+# Packaging + tooling configuration for biomimetic-lattice-pipeline (PEP 621).
+#
+# Purpose:   make the project pip-installable ("pip install -e .") and declare
+#            its dependencies, test markers, and lint/format settings in one
+#            place so the same config drives local dev and CI.
+# Why split: the FEA/CAD/visualization stack (SfePy, CadQuery, gmsh, ...) is
+#            heavy and platform-awkward, so it lives in an optional extra and is
+#            kept OUT of the default install / CI, which exercise the pure-Python
+#            design + analytics logic only.
+# =============================================================================
+
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "biomimetic-lattice-pipeline"
+version         = "0.1.0"
+description     = "Micro-CT-driven generation of biomimetic enamel lattices with FEA-based design optimization."
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = { text = "Apache-2.0" }
+authors         = [{ name = "Cameron B. Renteria", email = "crentb@uw.edu" }]
+keywords = [
+    "bioinspired design", "biomimetic materials", "tooth enamel",
+    "finite element analysis", "parametric CAD", "design optimization",
+    "synchrotron microCT", "lattice", "Optuna",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+
+# Core runtime deps — light, pure-Python-friendly, installed everywhere
+# (these are all that the default test suite and CI need).
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "trimesh>=4.0",
+    "optuna>=3.4",
+    "PyYAML>=6.0",
+    "jsonschema>=4.0",
+]
+
+[project.optional-dependencies]
+# Heavy geometry/visualization stack (kept out of default install + CI).
+# NOTE: full FEA additionally needs CadQuery + SfePy, installed via conda
+# (see README), plus the upstream stock CAD module from microct_pipeline.
+fea = ["pyvista>=0.43", "gmsh>=4.11", "meshio>=5.3", "scikit-image>=0.21"]
+# Dev tools are PINNED so CI and local agree exactly (unpinned black/ruff drift
+# their stable style across releases and break the format check non-deterministically).
+dev = ["pytest>=8.0", "pytest-cov>=4.1", "ruff==0.14.10", "black==25.11.0", "mypy==1.17.1", "pre-commit>=3.7"]
+
+[project.urls]
+# Public repository under the crentb GitHub account (github.com/crentb).
+Homepage = "https://github.com/crentb/biomimetic-lattice-pipeline"
+Issues   = "https://github.com/crentb/biomimetic-lattice-pipeline/issues"
+
+# Discover the eight top-level packages (each has an __init__.py). tests/,
+# scripts/, config/, schemas/, and docs/ are intentionally excluded from the
+# installable wheel.
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["biomimetic_pipeline*"]   # single namespace package (subpackages discovered recursively)
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: requires the heavy FEA/CAD stack (SfePy/CadQuery/gmsh); skipped in default CI",
+]
+
+[tool.ruff]
+line-length    = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Start lenient: prioritize real-bug rules (pyflakes) + import hygiene; defer
+# stylistic tightening to a later pass so the first CI run is green and honest.
+select = ["E", "F", "I"]   # pycodestyle errors, pyflakes, isort
+# v1 lenient ruleset (tighten in a later pass):
+#   E501 - long lines: handled by black; many long scientific literals
+#   E402 - module import not at top: intentional sys.path-before-import in tests
+#   F841 - unused local variable: harmless clutter; cleanup deferred
+ignore = ["E501", "E402", "F841"]
+
+[tool.black]
+line-length    = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.mypy]
+python_version         = "3.10"
+ignore_missing_imports = true   # third-party libs (cadquery, sfepy, gmsh, ...) ship no type stubs
+# v1 lenient baseline: surface real type errors without yet requiring annotations
+# everywhere. Tighten module-by-module over time (disallow_untyped_defs, etc.).
+
+[tool.coverage.run]
+# Measure coverage of the package code only (exclude tests/ and scripts/).
+source = ["biomimetic_pipeline"]

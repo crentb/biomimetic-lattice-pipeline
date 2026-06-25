@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "biomimetic_pipeline/cad_parameters.schema.json",
+  "title": "CAD parameter set driving lattice_cad.py (stock keys) + new-model extensions",
+  "type": "object",
+  "required": [
+    "ROD_DIAMETER",
+    "CENTER_SPACING",
+    "ENAMEL_THICKNESS",
+    "N_RINGS",
+    "BRIDGE_DIAMETER",
+    "N_BRIDGE_LAYERS",
+    "RING_ROTATION",
+    "TWIST_TYPE",
+    "CONTINUOUS_TWIST"
+  ],
+  "properties": {
+    "ROD_DIAMETER":       {"type": "number", "minimum": 0.1},
+    "CENTER_SPACING":     {"type": "number", "minimum": 0.1},
+    "ENAMEL_THICKNESS":   {"type": "number", "minimum": 1.0},
+    "N_RINGS":            {"type": "integer", "minimum": 1, "maximum": 10},
+    "BRIDGE_DIAMETER":    {"type": "number", "minimum": 0.1},
+    "N_BRIDGE_LAYERS":    {"type": "integer", "minimum": 2, "maximum": 10},
+    "BRIDGE_Z_OFFSETS":   {"type": ["array", "null"], "items": {"type": "number"}},
+    "PLATE_OVERHANG":     {"type": "number"},
+    "PLATE_THICKNESS":    {"type": "number"},
+    "PLATE_OVERLAP":      {"type": "number"},
+    "RING_ROTATION": {
+      "type": "object",
+      "patternProperties": {"^[0-9]+$": {"type": "number"}}
+    },
+    "Z_SAMPLES":          {"type": "integer", "minimum": 10},
+    "TWIST_TYPE": {"enum": ["linear", "accelerating", "sigmoid", "measured"]},
+    "CONTINUOUS_TWIST":   {"type": "boolean"},
+    "CUT_FLAT":           {"type": "boolean"},
+    "ADD_HORIZONTAL_BRIDGES": {"type": "boolean"},
+    "FILLET_RADIUS":           {"type": "number"},
+    "CHAMFER_SIZE":            {"type": "number"},
+    "JUNCTION_SPHERE_FACTOR":  {"type": "number"},
+    "ROD_TAPER_FACTOR":        {"type": "number"},
+    "EXPORT_DIR":              {"type": "string"},
+    "STL_TOLERANCE":           {"type": "number"},
+    "STL_ANGULAR_TOLERANCE":   {"type": "number"},
+    "measured_twist_profile": {
+      "type": ["object", "null"],
+      "properties": {
+        "z_um":     {"type": "array", "items": {"type": "number"}},
+        "twist_deg": {"type": "array", "items": {"type": "number"}}
+      }
+    },
+    "per_ring_diameter": {
+      "type": ["object", "null"],
+      "patternProperties": {"^[0-9]+$": {"type": "number"}}
+    },
+    "per_ring_bridge_elevation": {
+      "type": ["array", "null"],
+      "items": {"type": "number"}
+    },
+    "rod_cross_section": {
+      "type": ["object", "null"],
+      "properties": {
+        "shape": {"enum": ["circle", "ellipse"]},
+        "aspect_ratio": {"type": "number", "minimum": 1.0}
+      }
+    },
+    "twist_perturbation_amplitude_deg": {"type": "number", "minimum": 0.0},
+    "rng_seed":             {"type": "integer"},
+    "biology_scale_factor": {"type": "number", "minimum": 0.1, "default": 4.0},
+    "sla_min_feature_mm":   {"type": "number", "minimum": 0.01, "default": 0.3},
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "morphometrics_source":  {"type": "string"},
+        "morphometrics_sha256":  {"type": "string"},
+        "mapper_version":        {"type": "string"},
+        "generated_timestamp_iso": {"type": "string", "format": "date-time"}
+      }
+    }
+  }
+}

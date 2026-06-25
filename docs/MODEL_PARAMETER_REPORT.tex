@@ -1,0 +1,222 @@
+% =====================================================================
+% MODEL_PARAMETER_REPORT.tex
+% Full reference of every parameter built into the biomimetic_pipeline
+% lattice models: classification (measured / derived / design constant),
+% formula, source morphometric, units, clamps, and inter-parameter
+% relationships. Built on a 2026-05-31 value-flow audit
+% with every claim re-verified
+% against the actual source. House style: NavyBlue / tcolorbox / fancyhdr.
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=NavyBlue,urlcolor=NavyBlue]{hyperref}
+
+\definecolor{HeadBlue}{named}{NavyBlue}
+\newcommand{\param}[1]{\texttt{#1}}
+
+% Status chips
+\newcommand{\sMeas}{\textcolor{ForestGreen}{\textbf{measured}}}
+\newcommand{\sDeriv}{\textcolor{NavyBlue}{\textbf{derived}}}
+\newcommand{\sConst}{\textcolor{RawSienna}{\textbf{design const}}}
+\newcommand{\sGap}{\textcolor{BrickRed}{\textbf{gap}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{1.2pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{HeadBlue}\leaders\hrule height \headrulewidth\hfill}}
+\lhead{\textcolor{HeadBlue}{\small Model Parameter Reference}}
+\rhead{\textcolor{HeadBlue}{\small biomimetic\_pipeline}}
+\cfoot{\textcolor{HeadBlue}{\thepage}}
+
+\newtcolorbox{notebox}[1][]{colback=NavyBlue!5,colframe=NavyBlue,fonttitle=\bfseries,
+  coltitle=white,title={#1},breakable,boxrule=0.8pt,arc=2pt,left=4pt,right=4pt}
+
+\begin{document}
+
+% ---------------- Title page ----------------
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\color{HeadBlue}\rule{\textwidth}{2pt}}\\[0.6cm]
+{\Huge\bfseries\color{HeadBlue} Model Parameter Reference}\\[0.35cm]
+{\Large Every parameter in the decussated-lattice models:}\\[0.15cm]
+{\Large measured, derived, or constant --- and how they relate}\\[0.5cm]
+{\color{HeadBlue}\rule{\textwidth}{2pt}}\\[1.2cm]
+{\large\textbf{Cameron Renteria}}\\[0.2cm]
+{\normalsize NIH--NIDCR Postdoctoral Fellow, University of Washington (MSE + OHS)}\\[1.0cm]
+{\normalsize \texttt{biomimetic\_pipeline} --- continuous-twist parametric route}\\[0.3cm]
+{\normalsize Compiled 2026-05-31; verified against source post value-flow audit}\\
+\vfill
+\begin{notebox}[Scope]
+\small This reference documents the \textbf{continuous\_twist} parametric lattice
+(\param{lattice\_cad.py} via \param{feature\_to\_cad.map\_morphometrics}). Each
+parameter is classified \sMeas{} (traceable to a measured SOM morphometric),
+\sDeriv{} (computed from other CAD parameters), or \sConst{} (a documented design
+or numerical constant, not a measurement). \sGap{} flags a traceability gap noted
+in the audit. The zero-free-parameter claim rests on the \sMeas{} rows; the
+\sConst{} and \sGap{} rows must be disclosed as such.
+\end{notebox}
+\end{titlepage}
+
+% ---------------- 1. Master ledger ----------------
+\section{Master ledger}
+Every emitted parameter at a glance. Canonical values are for the biomimetic
+\param{live\_001} specimen at \param{biology\_scale\_factor}=500.
+
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}p{0.235\textwidth} p{0.10\textwidth} p{0.115\textwidth} p{0.46\textwidth}@{}}
+\toprule
+\textbf{Parameter} & \textbf{Class} & \textbf{Value} & \textbf{Source / formula} \\
+\midrule
+\endhead
+\param{ROD\_DIAMETER}   & \sMeas  & \SI{2.1280}{mm} & $\mathrm{mean}(\text{rod\_diameter\_um})\times \text{scale}\times 10^{-3}$ \\
+\param{CENTER\_SPACING} & \sMeas  & \SI{3.1919}{mm} & band\_width\_um, clamped to ceiling $1.5\times$ROD \\
+\param{RING\_ROTATION}  & \sMeas  & $\{+2.27\ldots-54.17\}^\circ$ & $\int$pitch\_signed\_deg over depth, anchored to band[0] \\
+\param{ROD\_TAPER\_FACTOR} & \sMeas & 0.0 & measured $-0.041$, clamped to $[0,1]$ (logged) \\
+\param{N\_BRIDGE\_LAYERS} & \sMeas/swept & 4--9 & periodicity (degenerate$\to$2) \emph{or} sweep-injected \\
+\param{per\_ring\_diameter} & \sMeas\,\sGap & (6 vals) & graded rod profile --- \textbf{dropped at consume} \\
+\param{rod\_cross\_section} & \sMeas\,\sGap & $a/b=3.62$ & from eccentricity --- \textbf{dropped (built circular)} \\
+\param{twist\_perturbation\_amplitude\_deg} & \sMeas\,\sGap & 15.0 & $(\text{tortuosity}-1)\times180=20.69$, \textbf{saturated} at 15, clamp unlogged \\
+\midrule
+\param{BRIDGE\_DIAMETER} & \sDeriv & \SI{1.7024}{mm} & $\text{bridge\_ratio}\times$ROD $=0.80\times$ROD \\
+\param{BRIDGE\_Z\_OFFSETS} & \sDeriv & $N$ z-levels & safe band of (ENAMEL, PLATE\_OVERLAP, BRIDGE, jitter) \\
+\midrule
+\param{bridge\_ratio}    & \sConst\,\sGap & 0.80 & hand-tuned; sole BRIDGE determinant; not in morphometrics \\
+\param{biology\_scale\_factor} & \sConst & 500 & \si{\micro\meter}$\to$mm print-scale convention \\
+\param{N\_RINGS}         & \sConst & 5 & hardcoded (dead inference code) \\
+\param{ENAMEL\_THICKNESS} & \sConst & \SI{20}{mm} & stock default (no measured source) \\
+\param{OCCT\_TANGENT\_JITTER\_MM} & \sConst & 0.50 & numerical OCCT-escape; per-trial; mixed across sweep \\
+\param{PLATE\_OVERLAP/THICKNESS} & \sConst & 0.5 / 1.2 & stock plate geometry \\
+\param{Z\_SAMPLES}       & \sConst & 50 & helical sweep resolution (affects OCCT tangent) \\
+\midrule
+\param{MATERIAL\_E}      & \sConst & \SI{3000}{MPa} & SLA resin; recorded in metrics \\
+\param{MATERIAL\_NU}     & \sConst & 0.40 & SLA resin Poisson ratio \\
+\param{mesh\_size\_mm}   & \sConst\,\sGap & 0.5 & $\sim$3--4 elem/cross-section; no convergence study \\
+\param{vm\_target\_mpa}  & \sConst & 200 & design stress target (the one objective field consumed) \\
+\param{seed\_disp\_mm / solver\_tolerance\_pct} & \sConst\,\sGap & 1.0 / 5\% & \textbf{dead YAML} --- strain\_solver defaults coincide \\
+\param{COMPRESS\_DISP\_MM} & \sDeriv & solved & bisected until avg von Mises $=$ \param{vm\_target\_mpa} \\
+\bottomrule
+\end{longtable}
+
+% ---------------- 2. Measured-derived ----------------
+\section{Measured-derived parameters (the zero-free-parameter core)}
+These trace to the SOM morphometrics; they are the architecture the manuscript claims is inherited from measurement.
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[\param{ROD\_DIAMETER} = \SI{2.127955}{mm}.]
+  $\mathrm{mean}(\text{depth\_profiles.rod\_diameter\_um\_mean})\times\text{biology\_scale\_factor}(500)\times10^{-3}$.
+  The measured axial profile is collapsed to a scalar (the radial grading is recovered in \param{per\_ring\_diameter}, then dropped --- see gaps).
+\item[\param{CENTER\_SPACING} = \SI{3.191932}{mm}.]
+  Derived from \texttt{band\_width\_um} then clamped; the operative bound is the ceiling $1.5\times$ROD. Floor $\max(1.05\times\text{ROD},\,2\times\text{SLA\_min})$ guarantees rods cannot overlap.
+\item[\param{RING\_ROTATION} (per ring $0\ldots N_\text{RINGS}$).]
+  Cumulative integral of \texttt{depth\_profiles.pitch\_signed\_deg} over depth, sampled at $i/N_\text{RINGS}$, then the whole dict is anchored so ring~0 $=$ \texttt{bands[0].mean\_direction}. Canonical: $\{0\!:\!+2.27,\,1\!:\!-5.84,\,2\!:\!-15.11,\,3\!:\!-31.00,\,4\!:\!-44.95,\,5\!:\!-54.17\}^\circ$. \emph{Modeling caveat:} pitch (an angle) is integrated over depth and used directly as a twist increment --- an implicit ``local pitch $\approx$ twist per depth'' assumption to state in Methods.
+\item[\param{ROD\_TAPER\_FACTOR} = 0.0.]
+  Measured taper $-0.041$ (slight narrowing) clamped to $[0,1]$; the clamp \emph{is} logged in \texttt{provenance.scale\_clamps}.
+\item[\param{N\_BRIDGE\_LAYERS}.]
+  The measured derivation from \texttt{dominant\_wavelength\_um\_mean}(85) is degenerate (rounds to 0, floor-rescued to 2). In the canonical sweep it is the \emph{design variable} (4--9), injected via \texttt{extra\_overrides} --- legitimately swept, but flag it as injected, not measured.
+\end{description}
+
+% ---------------- 3. Derived ----------------
+\section{Derived (geometric) parameters}
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[\param{BRIDGE\_DIAMETER} = \SI{1.702364}{mm} $= 0.80\times$\param{ROD\_DIAMETER}.]
+  Tied to ROD via \param{bridge\_ratio}; must stay strictly $<$ ROD (lattice\_cad invariant).
+  \begin{notebox}[Fixed bug --- the reason for this audit]
+  \small Overriding \param{ROD\_DIAMETER} used to \emph{silently re-derive} this value
+  ($0.80\times$thick rod $=$ \SI{2.47}{mm}), shipping the whole thick FEA arm on wrong
+  geometry. As of 2026-05-31 \param{map\_morphometrics} honors an explicit
+  \param{BRIDGE\_DIAMETER}/\param{CENTER\_SPACING} override and \emph{raises} on a lone
+  ROD override. Locked by \texttt{tests/test\_value\_carrythrough.py}.
+  \end{notebox}
+\item[\param{BRIDGE\_Z\_OFFSETS} ($N$ z-levels).]
+  \texttt{compute\_safe\_bridge\_elevations}: $N$ uniformly-spaced elevations in a safe band
+  $[\text{plate\_overlap}+m,\ \text{cut\_top}-\text{plate\_overlap}-m]$ where $m=\tfrac12$BRIDGE$+$clearance,
+  then shifted up by \param{OCCT\_TANGENT\_JITTER\_MM} (top pinned). Depends on ENAMEL, PLATE\_OVERLAP, BRIDGE, jitter, $N$ --- not on a measurement.
+\item[\param{COMPRESS\_DISP\_MM}.]
+  Not an input: the strain solver bisects displacement until the average von Mises stress equals \param{vm\_target\_mpa} (200 MPa), so all designs compare at matched representative stress.
+\end{description}
+
+% ---------------- 4. Design constants ----------------
+\section{Design constants (documented, \emph{not} measured)}
+These must be disclosed as conventions/constants in the manuscript --- they are not free fits, but neither are they measured.
+\begin{itemize}[leftmargin=1.4em]
+\item \param{bridge\_ratio}=0.80 --- the \textbf{sole} determinant of every bridge diameter, hand-tuned, in neither morphometrics file. The most load-bearing non-measured constant. \sGap
+\item \param{biology\_scale\_factor}=500 --- the \si{\micro\meter}$\to$mm print-scale convention (reverse-engineered to the stock $\sim$2 mm rod). Correctly applied and logged.
+\item \param{N\_RINGS}=5 --- hardcoded; the inference routine ignores its arguments (dead code). Sizes \param{RING\_ROTATION}, \param{per\_ring\_diameter}, and the twist grid. \sGap
+\item \param{ENAMEL\_THICKNESS}=\SI{20}{mm}, \param{PLATE\_OVERLAP}=0.5, \param{PLATE\_THICKNESS}=1.2, \param{Z\_SAMPLES}=50, \param{FILLET/CHAMFER}=0, \param{JUNCTION\_SPHERE\_FACTOR}=0 --- stock geometry/meshing constants.
+\item \param{OCCT\_TANGENT\_JITTER\_MM}=0.50 --- a \emph{numerical} sub-mm bridge-height nudge to dodge OCCT boolean tangency. Mixed across the sweep (0.0/0.15/0.50), recorded per-trial in each \texttt{cad\_params.json}; not a design quantity. \sGap{} (not in provenance summary).
+\end{itemize}
+
+% ---------------- 5. FEA inputs ----------------
+\section{FEA inputs}
+\begin{itemize}[leftmargin=1.4em]
+\item \param{MATERIAL\_E}=\SI{3000}{MPa}, \param{MATERIAL\_NU}=0.40 --- SLA resin. \emph{Verified} required-and-passed: \texttt{run\_one\_iteration} demands them, sets them in the solver env, and \texttt{metrics.json} records \texttt{material\_E\_MPa}/\texttt{material\_nu}. (The audit's ``silent 85000 MPa fallback'' was over-stated --- there is no path that reaches the stock default.) Cite the resin datasheet in Methods.
+\item \param{vm\_target\_mpa}=200 --- the design operating point; the one objective-config field actually consumed.
+\item \param{mesh\_size\_mm}=0.5 --- $\sim$3--4 elements across a rod/bridge cross-section on a geometry-sensitive model; no convergence study in-repo. \sGap
+\item \param{seed\_disp\_mm}=1.0, \param{solver\_tolerance\_pct}=5\% --- declared in \texttt{crack\_deflection.yaml} but \textbf{not forwarded} to the solver; \texttt{strain\_solver} uses its own equal defaults, so editing the YAML changes nothing. \sGap{} (dead config / false provenance).
+\end{itemize}
+
+% ---------------- 6. Relationships ----------------
+\section{How the parameters relate}
+\begin{notebox}[The coupling web]
+\small
+\textbf{Rod $\rightarrow$ bridge $\rightarrow$ spacing (the invariant chain).}
+$\param{BRIDGE\_DIAMETER}=0.80\,\param{ROD\_DIAMETER}$ and must stay $<$ ROD;
+$\param{CENTER\_SPACING}=1.5\,\param{ROD\_DIAMETER}$ (ceiling) and must stay $>1.05\,$ROD.
+So ROD sets both bridge thickness and ring pitch.\\[4pt]
+\textbf{Thick-rod variant.} $\param{ROD\_DIAMETER}=\param{CENTER\_SPACING}-0.025$ (\SI{0.025}{mm}
+worst-case rod-surface gap), with \param{BRIDGE\_DIAMETER} \emph{held} at the biomimetic
+\SI{1.702}{mm}. Generated via \texttt{make\_thick\_rod\_variant.py}, which sets ROD on the
+param dict directly --- the only correct path, since \param{map\_morphometrics} would otherwise
+re-derive BRIDGE/CS from the grown rod.\\[4pt]
+\textbf{Bridge placement.} \param{BRIDGE\_Z\_OFFSETS} span $=f(\param{ENAMEL\_THICKNESS},
+\param{PLATE\_OVERLAP}, \param{BRIDGE\_DIAMETER}, \param{OCCT\_TANGENT\_JITTER\_MM})$; the
+$N$ layers are uniform within it. Denser $N$ $\Rightarrow$ tighter vertical gap $\Rightarrow$
+more OCCT tangency risk (hence the jitter).\\[4pt]
+\textbf{Discretization.} \param{N\_RINGS}=5 sizes \param{RING\_ROTATION}, \param{per\_ring\_diameter},
+and the twist sampling grid. \param{Z\_SAMPLES}=50 sets the helical sweep resolution.\\[4pt]
+\textbf{FEA closure.} \param{COMPRESS\_DISP\_MM} is bisected until $\langle\sigma_{vM}\rangle=
+\param{vm\_target\_mpa}$ given \param{MATERIAL\_E}; all metrics are read at that matched stress.
+\end{notebox}
+
+% ---------------- 7. Known gaps ----------------
+\section{Known gaps \& disclosures (from the audit)}
+\begin{enumerate}[leftmargin=1.5em]
+\item \textbf{Dropped measured geometry (deferred decision).} \param{per\_ring\_diameter}
+  (radial rod grading) and \param{rod\_cross\_section} (ellipticity $a/b\!=\!3.62$) are
+  \emph{emitted} but not consumed by the stock CAD --- every rod is built at the scalar
+  \param{ROD\_DIAMETER} and as a circle. The decussation architecture (twist, bands,
+  bridges) \emph{is} measured-derived; the per-rod cross-section is simplified. Decision on
+  disclose-vs-implement is deferred.
+\item \textbf{Untraceable constants.} \param{bridge\_ratio} and \param{N\_RINGS} should be
+  derived from a measured quantity or explicitly labeled design constants in provenance.
+\item \textbf{Dead solver config.} \param{seed\_disp\_mm}/\param{solver\_tolerance\_pct} should
+  be wired through or removed; do not echo unconsumed values as provenance.
+\item \textbf{Unlogged saturating clamp.} \param{twist\_perturbation\_amplitude\_deg} is fully
+  set by the \SI{15}{\degree} cap (measured $20.69^\circ$); log the saturation.
+\item \textbf{Jitter provenance.} Record \param{OCCT\_TANGENT\_JITTER\_MM} per run so committed
+  trials are re-derivable from source.
+\item \textbf{Fixed.} The \param{BRIDGE\_DIAMETER}/\param{CENTER\_SPACING} silent re-derivation
+  on override (the bug that shipped inflated thick bridges) is fixed and regression-tested.
+\end{enumerate}
+
+\begin{notebox}[Bottom line]
+\small The lattice \emph{architecture} --- rod diameter, ring spacing, per-ring decussation
+twist, taper, and the swept bridge-layer count --- is measured-derived and now value-locked by
+tests. The bridge \emph{thickness} (via \param{bridge\_ratio}), the \si{\micro\meter}$\to$mm
+\param{biology\_scale\_factor}, ring count, part height, material, and mesh are documented
+constants. Two measured cross-section details (grading, ellipticity) are currently simplified
+away. Disclosing exactly this split is what makes the zero-free-parameter claim honest.
+\end{notebox}
+
+\end{document}

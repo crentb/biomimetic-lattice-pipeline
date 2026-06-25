@@ -1,0 +1,28 @@
+# Pre-commit hooks — run `pre-commit install` once, then these execute on every
+# `git commit`, catching the same lint/format issues the CI gates on *before*
+# they ever reach CI. Keep the tool versions roughly in step with pyproject.
+repos:
+  # Ruff: lint (with safe auto-fixes). Matches the CI `ruff check .` gate.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.10
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  # Black: the single source of truth for formatting. Matches `black --check .`.
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+
+  # Small, fast hygiene hooks.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=2048]   # block accidental large data commits (docs PDFs are ~2 MB)

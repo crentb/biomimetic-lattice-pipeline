@@ -1,0 +1,16 @@
+name: composite
+direction: maximize
+stress_target:
+  vm_target_mpa: 200.0
+  field: avg_von_mises_MPa
+  solver_tolerance_pct: 5.0
+  max_iters: 5
+  fallback: penalty
+  penalty_weight: 0.001
+terms:
+  - metric: crack_deflection_tortuosity_p90
+    weight: 1.0
+  - metric: specific_toughness_mJ_per_MPa
+    weight: 0.01
+  - metric: SCF
+    weight: -0.1

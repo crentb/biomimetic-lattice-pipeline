@@ -1,0 +1,14 @@
+name: toughness
+direction: maximize
+stress_target:
+  vm_target_mpa: 200.0
+  field: avg_von_mises_MPa
+  solver_tolerance_pct: 5.0
+  max_iters: 5
+  fallback: penalty
+  penalty_weight: 0.001
+terms:
+  - metric: specific_toughness_mJ_per_MPa
+    weight: 1.0
+  - metric: energy_absorption_mJ
+    weight: 0.1

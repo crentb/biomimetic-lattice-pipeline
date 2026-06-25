@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "biomimetic_pipeline/morphometrics.schema.json",
+  "title": "Canonical microCT morphometrics (one specimen)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "specimen_id",
+    "units",
+    "provenance",
+    "depth_profiles",
+    "angle_stats",
+    "bands"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "specimen_id": {"type": "string"},
+    "units": {
+      "type": "object",
+      "required": ["length", "angle", "stress"],
+      "properties": {
+        "length": {"const": "um"},
+        "angle": {"const": "deg"},
+        "stress": {"const": "MPa"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source_paths", "source_hashes", "ingestion_timestamp_iso", "coordinate_frame"],
+      "properties": {
+        "source_paths": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "source_hashes": {
+          "type": "object",
+          "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        },
+        "ingestion_timestamp_iso": {"type": "string", "format": "date-time"},
+        "coordinate_frame": {
+          "type": "object",
+          "required": ["z_origin", "z_axis", "xy_units", "z_units"],
+          "properties": {
+            "z_origin": {"type": "string"},
+            "z_axis": {"type": "string"},
+            "xy_units": {"type": "string"},
+            "z_units": {"type": "string"}
+          }
+        },
+        "pipeline_version": {"type": "string"},
+        "scale_clamps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["field", "raw_value", "clamped_value", "reason"],
+            "properties": {
+              "field": {"type": "string"},
+              "raw_value": {"type": "number"},
+              "clamped_value": {"type": "number"},
+              "reason": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "depth_profiles": {
+      "type": "object",
+      "required": ["depth_um"],
+      "properties": {
+        "depth_um": {"type": "array", "items": {"type": "number"}},
+        "pitch_signed_deg": {"type": "array", "items": {"type": "number"}},
+        "pitch_abs_deg": {"type": "array", "items": {"type": "number"}},
+        "yaw_signed_deg": {"type": "array", "items": {"type": "number"}},
+        "yaw_abs_deg": {"type": "array", "items": {"type": "number"}},
+        "tilt_signed_deg": {"type": "array", "items": {"type": "number"}},
+        "tilt_abs_deg": {"type": "array", "items": {"type": "number"}},
+        "rod_diameter_um_mean": {"type": "array", "items": {"type": "number"}},
+        "rod_diameter_um_std": {"type": "array", "items": {"type": "number"}},
+        "eccentricity_mean": {"type": "array", "items": {"type": "number"}},
+        "eccentricity_std": {"type": "array", "items": {"type": "number"}},
+        "tortuosity_mean": {"type": "array", "items": {"type": "number"}},
+        "tortuosity_p90": {"type": "array", "items": {"type": "number"}},
+        "displacement_mag_um_mean": {"type": "array", "items": {"type": "number"}}
+      }
+    },
+    "angle_stats": {
+      "type": "object",
+      "patternProperties": {
+        "^(pitch|yaw|tilt)$": {
+          "type": "object",
+          "required": ["n", "mean", "median", "std", "p5", "p95", "min", "max"],
+          "properties": {
+            "n": {"type": "integer"},
+            "mean": {"type": "number"},
+            "median": {"type": "number"},
+            "std": {"type": "number"},
+            "sem": {"type": "number"},
+            "iqr": {"type": "number"},
+            "skew": {"type": "number"},
+            "kurt": {"type": "number"},
+            "p5": {"type": "number"},
+            "p95": {"type": "number"},
+            "min": {"type": "number"},
+            "max": {"type": "number"}
+          }
+        }
+      }
+    },
+    "bands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["band_id", "area_fraction_pct", "mean_direction_deg", "band_width_um"],
+        "properties": {
+          "band_id": {"type": "integer"},
+          "area_fraction_pct": {"type": "number"},
+          "mean_direction_deg": {"type": "number"},
+          "circular_variance": {"type": "number"},
+          "mean_displacement_mag_um": {"type": "number"},
+          "band_width_um": {
+            "type": "object",
+            "required": ["mean", "std", "min", "max"],
+            "properties": {
+              "mean": {"type": "number"},
+              "std": {"type": "number"},
+              "min": {"type": "number"},
+              "max": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    "band_boundaries": {
+      "type": "object",
+      "additionalProperties": {"type": "number"}
+    },
+    "periodicity": {
+      "type": "object",
+      "properties": {
+        "dominant_wavelength_um_mean": {"type": "number"},
+        "dominant_wavelength_um_std": {"type": "number"}
+      }
+    },
+    "rod_slice_stats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "z_um": {"type": "number"},
+          "equiv_diam_um_mean": {"type": "number"},
+          "equiv_diam_um_std": {"type": "number"},
+          "eccentricity_mean": {"type": "number"},
+          "eccentricity_std": {"type": "number"},
+          "circularity_mean": {"type": "number"},
+          "solidity_mean": {"type": "number"},
+          "n_rods": {"type": "integer"},
+          "boundary_frac": {"type": "number"}
+        }
+      }
+    },
+    "rod_tracks_summary": {
+      "type": "object",
+      "properties": {
+        "n_tracks": {"type": "integer"},
+        "n_complete": {"type": "integer"},
+        "mean_arc_length_um": {"type": "number"},
+        "mean_chord_length_um": {"type": "number"},
+        "tortuosity_mean": {"type": "number"},
+        "tortuosity_p90": {"type": "number"}
+      }
+    }
+  }
+}

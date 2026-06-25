@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "biomimetic_pipeline/objective.schema.json",
+  "title": "Pluggable optimization objective",
+  "type": "object",
+  "required": ["name", "direction", "terms"],
+  "properties": {
+    "name": {"type": "string"},
+    "direction": {"enum": ["minimize", "maximize"]},
+    "stress_target": {
+      "type": "object",
+      "required": ["vm_target_mpa", "field"],
+      "properties": {
+        "vm_target_mpa":        {"type": "number", "minimum": 0.1},
+        "also_evaluate_at_mpa": {"type": "array", "items": {"type": "number"}},
+        "field": {"enum": ["avg_von_mises_MPa", "VM_P50_MPa", "VM_P90_MPa", "VM_mean_MPa"]},
+        "solver_tolerance_pct": {"type": "number", "minimum": 0.1, "maximum": 50.0, "default": 5.0},
+        "max_iters":            {"type": "integer", "minimum": 1, "maximum": 20, "default": 5},
+        "seed_disp_mm":         {"type": "number", "minimum": 0.001, "default": 1.0},
+        "fallback":             {"enum": ["penalty", "skip"], "default": "penalty"},
+        "penalty_weight":       {"type": "number", "minimum": 0.0, "default": 0.001}
+      }
+    },
+    "terms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["metric", "weight"],
+        "properties": {
+          "metric":        {"type": "string"},
+          "weight":        {"type": "number"},
+          "target_value":  {"type": "number"},
+          "normalize_by":  {"type": "number"}
+        }
+      }
+    }
+  }
+}

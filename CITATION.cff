@@ -1,0 +1,44 @@
+# Citation metadata for biomimetic-lattice-pipeline (Citation File Format 1.2.0).
+# Lets GitHub render a "Cite this repository" button and gives users a precise,
+# machine-readable citation. Update `version`/`date-released` on each tagged release.
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software (below) and the associated manuscript (preferred-citation)."
+title: "biomimetic-lattice-pipeline"
+abstract: "Micro-CT-driven generation of biomimetic enamel lattices with finite-element-based design optimization: a reproducible pipeline from synchrotron micro-CT morphometrics to parametric CAD, FEA, and closed-loop (Optuna) design optimization."
+type: software
+authors:
+  - family-names: "Renteria"
+    given-names: "Cameron B."
+    email: "crentb@uw.edu"
+    affiliation: "University of Washington"
+version: "0.1.0"
+date-released: "2026-06-06"
+license: "Apache-2.0"
+repository-code: "https://github.com/crentb/biomimetic-lattice-pipeline"
+keywords:
+  - "bioinspired design"
+  - "biomimetic materials"
+  - "tooth enamel"
+  - "finite element analysis"
+  - "parametric CAD"
+  - "design optimization"
+  - "synchrotron microCT"
+  - "lattice"
+  - "Optuna"
+preferred-citation:
+  type: article
+  title: "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices"
+  status: "in-preparation"
+  year: 2026
+  journal: "Matter"
+  authors:
+    - family-names: "Renteria"
+      given-names: "Cameron B."
+    - family-names: "Grimm"
+      given-names: "J. R."
+    - family-names: "Yunker"
+      given-names: "A."
+    - family-names: "Parkinson"
+      given-names: "D. Y."
+    - family-names: "Arola"
+      given-names: "D. D."

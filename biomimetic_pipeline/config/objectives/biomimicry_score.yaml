@@ -1,0 +1,12 @@
+name: biomimicry_score
+direction: minimize
+stress_target:
+  vm_target_mpa: 200.0
+  field: avg_von_mises_MPa
+  solver_tolerance_pct: 5.0
+  max_iters: 5
+  fallback: penalty
+  penalty_weight: 0.001
+terms:
+  - metric: biomimicry_score
+    weight: 1.0

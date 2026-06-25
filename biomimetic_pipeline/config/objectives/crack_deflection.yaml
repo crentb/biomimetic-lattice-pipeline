@@ -1,0 +1,18 @@
+name: crack_deflection
+direction: maximize
+stress_target:
+  vm_target_mpa: 200.0
+  also_evaluate_at_mpa: [100.0]
+  field: avg_von_mises_MPa
+  solver_tolerance_pct: 5.0
+  max_iters: 5
+  seed_disp_mm: 1.0
+  fallback: penalty
+  penalty_weight: 0.001
+terms:
+  - metric: crack_deflection_tortuosity_p90
+    weight: 1.0
+  - metric: crack_deflection_tortuosity_mean
+    weight: 0.5
+  - metric: critical_strain_at_200MPa
+    weight: 0.25
