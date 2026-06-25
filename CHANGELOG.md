@@ -7,10 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-06-24
-
 ### Added
-- Initial standalone, open-source release of the micro-CT-driven biomimetic
+- Initial standalone, open-source version of the micro-CT-driven biomimetic
   lattice design + FEA optimization pipeline (software only; extracted from the
   `microct_pipeline` research tree).
 - Single-namespace package layout (`biomimetic_pipeline`) for clean,
