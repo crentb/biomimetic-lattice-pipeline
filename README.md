@@ -30,6 +30,7 @@ metrics/       crack-deflection streamlines, biomimicry score, SCF, toughness, .
 objectives/    YAML-configured, registry-based scoring (crack deflection, toughness, ...)
 orchestration/ single-run, sweep, Optuna optimization, and closed-loop drivers
 reporting/     LaTeX/PDF report generation
+geometry/      CadQuery + SfePy CAD/mesh/FEA engine, driven by generators/ + fea/ via subprocess (conda)
 ```
 
 ## Install
@@ -47,9 +48,9 @@ python -m pip install -e ".[fea]"      # pyvista, gmsh, meshio, scikit-image
 ```
 
 > **Full FEA** additionally requires **CadQuery** and **SfePy** (installed via conda, as they are awkward to
-> pip-install across platforms) plus the upstream stock CAD module from the parent `microct_pipeline` project.
-> The default install and the CI exercise the **pure-Python design and analytics logic**; the heavy FEA/CAD
-> path is gated behind the `slow` pytest marker.
+> pip-install across platforms); the CAD/FEA engine itself ships in this repo under `geometry/`
+> (see `geometry/README.md`). The default install and the CI exercise the **pure-Python design and analytics
+> logic**; the heavy FEA/CAD path is gated behind the `slow` pytest marker.
 
 ## Quickstart
 

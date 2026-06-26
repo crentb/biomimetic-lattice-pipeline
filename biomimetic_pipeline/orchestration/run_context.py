@@ -23,8 +23,23 @@ from typing import Any, Dict, List, Optional
 PIPELINE_VERSION = "0.1.0"
 
 BIOMIMETIC_ROOT = Path(__file__).resolve().parent.parent
-MICROCT_ROOT = BIOMIMETIC_ROOT.parent
-CAD_STACK_DIR = MICROCT_ROOT / "cad_modeling" / "Decussated Models Continous Twist"
+REPO_ROOT = BIOMIMETIC_ROOT.parent
+MICROCT_ROOT = REPO_ROOT  # retained for the provenance stub / backward compatibility
+
+# The CadQuery (CAD + meshing) and SfePy (FEA) geometry engine ships inside this
+# repository under geometry/. To drive an external copy instead (e.g. a local
+# microct_pipeline checkout laid out as
+# <root>/cad_modeling/Decussated Models Continous Twist/), set the
+# MICROCT_PIPELINE_ROOT environment variable.
+_EXTERNAL_ROOT = os.environ.get("MICROCT_PIPELINE_ROOT")
+if _EXTERNAL_ROOT:
+    CAD_STACK_DIR = (
+        Path(_EXTERNAL_ROOT).expanduser().resolve()
+        / "cad_modeling"
+        / "Decussated Models Continous Twist"
+    )
+else:
+    CAD_STACK_DIR = REPO_ROOT / "geometry"
 
 STOCK_LATTICE_CAD = CAD_STACK_DIR / "lattice_cad.py"
 STOCK_LATTICE_MESH = CAD_STACK_DIR / "lattice_mesh.py"
