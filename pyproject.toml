@@ -55,7 +55,7 @@ dependencies = [
 [project.optional-dependencies]
 # Heavy geometry/visualization stack (kept out of default install + CI).
 # NOTE: full FEA additionally needs CadQuery + SfePy, installed via conda
-# (see README), plus the upstream stock CAD module from microct_pipeline.
+# (see README); the CAD/FEA engine itself ships in this repo under geometry/.
 fea = ["pyvista>=0.43", "gmsh>=4.11", "meshio>=5.3", "scikit-image>=0.21"]
 # Dev tools are PINNED so CI and local agree exactly (unpinned black/ruff drift
 # their stable style across releases and break the format check non-deterministically).
@@ -82,6 +82,9 @@ markers = [
 [tool.ruff]
 line-length    = 100
 target-version = "py310"
+# geometry/ holds the conda-driven CadQuery/SfePy engine (carried as-is research
+# code, run via subprocess, not imported by the package) -- exclude from linting.
+extend-exclude = ["geometry"]
 
 [tool.ruff.lint]
 # Start lenient: prioritize real-bug rules (pyflakes) + import hygiene; defer
@@ -96,6 +99,7 @@ ignore = ["E501", "E402", "F841"]
 [tool.black]
 line-length    = 100
 target-version = ["py310", "py311", "py312"]
+extend-exclude = "/geometry/"   # see [tool.ruff] note: the geometry engine is carried as-is
 
 [tool.mypy]
 python_version         = "3.10"
