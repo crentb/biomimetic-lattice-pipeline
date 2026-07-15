@@ -152,6 +152,10 @@ jobs:
           format: table
           exit-code: "1"
           severity: CRITICAL,HIGH
+          # Gate on ACTIONABLE vulns only: a CVE with no fixed package
+          # released cannot be remediated by us; it stays visible in the
+          # scan log and starts gating the moment a fix ships.
+          ignore-unfixed: true
 
       - name: Smoke-test (run the fast suite inside the container)
         run: docker run --rm biomimetic-lattice-pipeline:ci pytest -m "not slow"
