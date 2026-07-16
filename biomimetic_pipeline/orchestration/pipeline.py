@@ -30,6 +30,7 @@ from biomimetic_pipeline.generators import (
 from biomimetic_pipeline.mapping import feature_to_cad
 from biomimetic_pipeline.metrics import biomimicry_score, crack_deflection
 from biomimetic_pipeline.objectives import registry as objective_registry
+from biomimetic_pipeline.orchestration.provenance import ProvenanceChain
 from biomimetic_pipeline.orchestration.run_context import RunContext, now_iso
 
 logger = logging.getLogger(__name__)
@@ -85,9 +86,19 @@ def run_pipeline(
     log = _open_log(ctx.run_dir / "pipeline.log")
     log(f"[{now_iso()}] pipeline start run={run_name} objective={objective_name}")
 
+    # Provenance chain: every stage records its artifact's SHA-256 plus the
+    # hashes of the upstream artifacts it consumed; consuming an artifact
+    # whose bytes changed since it was produced fails AT THE SEAM (see
+    # orchestration/provenance.py). The chain is signed at the end of the
+    # run and auditable standalone:
+    #   python -m biomimetic_pipeline.orchestration.provenance <run_dir>
+    chain = ProvenanceChain(run_dir=ctx.run_dir)
+
     # --- 1. Ingest morphometrics, map to CAD parameters -------------------
     morphometrics_path = Path(morphometrics_path)
     morphometrics = json.loads(morphometrics_path.read_text())
+    chain.record("morphometrics", morphometrics_path)
+    log(f"[{now_iso()}] provenance: morphometrics anchored")
 
     # The digital_twin model-type bypasses the feature-to-CAD mapping
     # entirely: the twin is built directly from PIV rod trajectories, so
@@ -115,6 +126,11 @@ def run_pipeline(
         feature_to_cad.validate(cad_params)
         cad_params_path = feature_to_cad.save(cad_params, ctx.run_dir / "cad_params.json")
         log(f"[{now_iso()}] cad_params -> {cad_params_path}")
+
+    # Contract 2 sealed: cad_params' entry records the morphometrics hash it
+    # was derived from -- and record() verifies morphometrics still matches
+    # its stage-1 hash before sealing (the verify-at-the-seam guarantee).
+    chain.record("cad_parameters", cad_params_path, upstream={"morphometrics": morphometrics_path})
 
     # --- 2. CAD + mesh -----------------------------------------------------
     if model_type == "digital_twin":
@@ -213,6 +229,11 @@ def run_pipeline(
         )
         log(f"[{now_iso()}] mesh {mesh_result.mesh_path}")
 
+    # Geometry + mesh sealed into the chain (both model_type branches emit
+    # cad_result.stl_path and mesh_result.mesh_path).
+    chain.record("cad_geometry", cad_result.stl_path, upstream={"cad_parameters": cad_params_path})
+    chain.record("mesh", mesh_result.mesh_path, upstream={"cad_geometry": cad_result.stl_path})
+
     # --- 3. FEA: either strain-solve to target VM or single fixed run -----
     if objective_name:
         objective = objective_registry.load_builtin(objective_name)
@@ -271,6 +292,14 @@ def run_pipeline(
     final_fea_dir = fea_root / "final"
     fea_runner.copy_fea_outputs(fea_result.iter_dir, final_fea_dir)
     shutil.copy2(cad_result.sidecar_path, final_fea_dir / "lattice_params.json")
+
+    # FEA results sealed: the element table every downstream metric reads,
+    # linked back to the mesh it was solved on.
+    chain.record(
+        "fea_element_results",
+        final_fea_dir / "element_results_compression.csv",
+        upstream={"mesh": mesh_result.mesh_path},
+    )
 
     metrics_result = metrics_runner.run(
         results_dir=final_fea_dir, sidecar_path=cad_result.sidecar_path
@@ -337,6 +366,23 @@ def run_pipeline(
 
     metrics_path = ctx.run_dir / "metrics.json"
     metrics_path.write_text(json.dumps(augmented, indent=2))
+
+    # Final contract sealed and the whole chain signed (HMAC over the
+    # canonical entries, keyed by BLP_PROVENANCE_KEY when set; unsigned
+    # chains are recorded as such and flagged by the audit CLI).
+    chain.record(
+        "metrics",
+        metrics_path,
+        upstream={
+            "fea_element_results": final_fea_dir / "element_results_compression.csv",
+            "cad_parameters": cad_params_path,
+        },
+    )
+    signature = chain.sign()
+    log(
+        f"[{now_iso()}] provenance chain sealed: {len(chain.entries)} stages, "
+        f"signature={'signed key_id=' + signature['key_id'] if signature else 'UNSIGNED (set BLP_PROVENANCE_KEY)'}"
+    )
 
     try:
         from biomimetic_pipeline.reporting import latex_report
