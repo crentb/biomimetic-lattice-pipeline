@@ -42,6 +42,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Callable by release.yml so a tagged commit is re-proven by these EXACT
+  # gates before anything publishes -- one definition of "green", not a
+  # release-time copy that silently drifts from this one.
+  workflow_call:
 
 # Least-privilege default for every job: read the repo, nothing else.
 # Jobs that need more (the signing job needs an OIDC token) request it

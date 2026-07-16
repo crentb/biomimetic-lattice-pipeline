@@ -1,0 +1,175 @@
+# =============================================================================
+# Release / Continuous Delivery for biomimetic-lattice-pipeline.
+#
+# Trigger: pushing a semantic-version tag (v*). CI (ci.yml) runs on pushes to
+# main and does not run on tags, so this workflow is what a tag executes.
+#
+# Nothing here publishes anything the gates have not just re-proven green ON
+# THE TAGGED COMMIT: `verify` re-runs the ENTIRE ci.yml (quality + security +
+# container scan + signed SBOM) through `workflow_call`, and every publish job
+# declares `needs: verify`. A tag whose commit fails CI publishes nothing.
+# Re-using ci.yml rather than copying its steps means there is exactly one
+# definition of "green" in this repo, and it cannot drift at release time.
+#
+# What ships, and where:
+#   1. PyPI -- sdist + wheel via Trusted Publishing. There is NO API token:
+#      PyPI verifies GitHub's short-lived OIDC identity for this repository and
+#      workflow, so no long-lived credential exists to store, rotate, or leak.
+#   2. GHCR -- the container image, scanned BEFORE it is pushed (a known
+#      CRITICAL/HIGH never reaches the registry), then signed BY DIGEST with
+#      cosign keyless, plus a SLSA build-provenance attestation binding the
+#      image to this workflow, commit, and runner.
+#
+# Credential posture -- zero stored secrets anywhere in this pipeline:
+#   PyPI  = OIDC Trusted Publishing (no token)
+#   GHCR  = the ephemeral, run-scoped GITHUB_TOKEN
+#   cosign = keyless via Sigstore (no private key exists)
+#
+# Consumer verification:
+#   cosign verify ghcr.io/crentb/biomimetic-lattice-pipeline:<tag> \
+#     --certificate-identity-regexp 'github.com/crentb/' \
+#     --certificate-oidc-issuer https://token.actions.githubusercontent.com
+#   gh attestation verify oci://ghcr.io/crentb/biomimetic-lattice-pipeline:<tag> \
+#     --owner crentb
+# =============================================================================
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+# Least-privilege default. Each job below escalates only to what it needs, so
+# the reason for every extra privilege is visible at its point of use.
+permissions:
+  contents: read
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # 1. Re-prove the tagged commit against the full CI gate.
+  #    Quality (ruff/black/mypy/pytest on 3.10-3.12), security (gitleaks/bandit/
+  #    pip-audit), container build + trivy + signed SBOM -- all of ci.yml.
+  # ---------------------------------------------------------------------------
+  verify:
+    name: Re-run the full CI gate on the tagged commit
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      id-token: write # ci.yml's docker-build job signs its SBOM keylessly
+
+  # ---------------------------------------------------------------------------
+  # 2. PyPI: build the distributions and publish them via Trusted Publishing.
+  # ---------------------------------------------------------------------------
+  pypi:
+    name: Publish sdist + wheel to PyPI (Trusted Publishing)
+    needs: verify
+    runs-on: ubuntu-latest
+    # Must match the Environment name registered on the PyPI publisher, and
+    # gives the release a single place to add manual approval later.
+    environment: pypi
+    permissions:
+      id-token: write # the OIDC identity PyPI verifies; no password is sent
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build sdist + wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Validate the built metadata — GATING
+        # Catches a description that would fail to render on PyPI, and
+        # malformed metadata, BEFORE upload -- a PyPI version number is
+        # permanent and cannot be re-uploaded once published.
+        run: |
+          python -m pip install twine
+          twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No `password:` / `with:` secrets -- the action exchanges the OIDC
+        # token granted above for a short-lived, upload-scoped PyPI token.
+
+  # ---------------------------------------------------------------------------
+  # 3. GHCR: scan, push, sign by digest, and attest build provenance.
+  # ---------------------------------------------------------------------------
+  ghcr:
+    name: Publish signed container + SLSA provenance to GHCR
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # push to ghcr.io/crentb/biomimetic-lattice-pipeline
+      id-token: write # cosign keyless signing + provenance attestation
+      attestations: write # store the SLSA attestation against the image
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # ephemeral, scoped to this run
+
+      - name: Build the release image (kept local so it is scanned before push)
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: docker build -t "${IMAGE}:${TAG}" -t "${IMAGE}:latest" .
+
+      - name: Scan the image BEFORE it is published — GATING
+        # Deliberately ordered before the push: the registry is public, and a
+        # pushed tag is visible (and pullable) the instant it lands. Gate on
+        # ACTIONABLE vulns only -- an unfixed CVE cannot be remediated by us,
+        # stays visible in the log, and starts gating the moment a fix ships.
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+          format: table
+          exit-code: "1"
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+
+      - name: Push the image and capture its immutable digest
+        id: push
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          docker push "${IMAGE}:${TAG}"
+          docker push "${IMAGE}:latest"
+          # Sign and attest the DIGEST, never the tag: tags are mutable
+          # pointers, digests are the content itself. RepoDigests is only
+          # populated once the push has succeeded.
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${IMAGE}:${TAG}" | cut -d@ -f2)
+          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign the published image by digest (cosign keyless)
+        # Keyless: GitHub's OIDC identity for THIS run signs through Sigstore
+        # and the signature lands in the public Rekor transparency log. The
+        # certificate binds the signature to this repo and workflow, so a
+        # consumer can prove the image came from here and not from a look-alike.
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}
+          DIGEST: ${{ steps.push.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"
+
+      - name: Attest SLSA build provenance
+        # Machine-verifiable answer to "what source and what builder produced
+        # this exact image?" -- attached to the image in the registry, so it
+        # travels with the artifact rather than living only in these logs.
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/${{ github.repository }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
