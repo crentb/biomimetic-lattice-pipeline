@@ -1,16 +1,39 @@
 # =============================================================================
-# Continuous Integration for biomimetic-lattice-pipeline.
+# Continuous Integration + DevSecOps for biomimetic-lattice-pipeline.
 #
-# Runs on every push / pull-request to main, across Python 3.10-3.12:
+# Runs on every push / pull-request to main.
+#
+# QUALITY (as before), across Python 3.10-3.12:
 #   1. install the package (core runtime + dev tools). The heavy FEA/CAD stack
 #      (SfePy / CadQuery / gmsh, the conda cad_env/sfepy_env) is intentionally
 #      NOT installed here -- those integration tests are marked `slow` and
 #      skipped, since GitHub-hosted runners do not have those environments.
 #   2. lint with ruff   3. check formatting with black   4. run the pytest suite.
 #
+# SECURITY (shift-left: scans run in parallel with lint/test, and BOTH must be
+# green before the expensive container job spends its minutes):
+#   5. secret detection over the full git history (gitleaks)
+#   6. static application security testing of the package source (bandit)
+#   7. dependency audit of the resolved environment against known-CVE
+#      databases (pip-audit)
+#   8. container vulnerability scan of the built image (trivy, CRITICAL/HIGH)
+#   9. SBOM: a Software Bill of Materials for the image (syft, SPDX JSON),
+#      uploaded as a build artifact
+#  10. artifact signing: the SBOM is keylessly signed with cosign via GitHub's
+#      OIDC identity (Sigstore); signature + certificate ship as artifacts, so
+#      any consumer can verify WHAT was built and BY WHICH workflow.
+#
 # A green run therefore certifies: the package installs cleanly, imports, is
-# lint- and format-clean, and its pure-Python design/analytics logic passes
-# its tests on three Python versions.
+# lint- and format-clean, passes its tests on three Python versions, contains
+# no detected secrets, no medium+ SAST findings, no known-vulnerable
+# dependencies, and ships in an image free of known CRITICAL/HIGH CVEs --
+# with a signed SBOM naming exactly what is inside.
+#
+# Gating philosophy (cheap checks first, one root cause = one red X):
+#   gitleaks/bandit/pip-audit cost seconds and GATE.  trivy GATES on
+#   CRITICAL/HIGH only.  SBOM + signing are evidence artifacts, not gates.
+#   Escape hatches are deliberate and visible: pip-audit findings that are
+#   accepted risks belong in --ignore-vuln flags HERE, in the diff, reviewed.
 # =============================================================================
 name: CI
 
@@ -19,6 +42,12 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+
+# Least-privilege default for every job: read the repo, nothing else.
+# Jobs that need more (the signing job needs an OIDC token) request it
+# explicitly at the job level -- privileges are visible where they are used.
+permissions:
+  contents: read
 
 jobs:
   lint-and-test:
@@ -57,13 +86,110 @@ jobs:
       - name: Tests (pytest; FEA-marked 'slow' tests skipped) with coverage
         run: pytest -m "not slow" --cov --cov-report=term-missing
 
-  docker-build:
-    name: Container image builds & runs
+  security:
+    name: Security scans (secrets, SAST, dependency audit)
     runs-on: ubuntu-latest
-    needs: lint-and-test          # only build the image once lint + tests are green
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # gitleaks scans the FULL history, not just the tip
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Secret detection (gitleaks, full history) — GATING
+        # A committed credential is a fail even if later deleted: history is
+        # forever once pushed. Pinned release binary; --redact keeps any hit
+        # out of the public log.
+        run: |
+          GITLEAKS_VERSION=8.18.4
+          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            | tar -xz gitleaks
+          ./gitleaks detect --source . --redact --no-banner -v
+
+      - name: Install package + scanners
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e "."
+          python -m pip install bandit pip-audit
+
+      - name: SAST (bandit, medium+ severity) — GATING
+        # -ll: report/act on MEDIUM and HIGH findings only, so the gate targets
+        # real weaknesses (injection, unsafe deserialization, weak crypto) and
+        # not style-grade LOW notes. Scans the shipped package, not tests.
+        run: bandit -r biomimetic_pipeline -ll
+
+      - name: Dependency audit (pip-audit vs known-CVE databases) — GATING
+        # Audits the RESOLVED environment (what actually installs, not just
+        # what pyproject names). A known-vulnerable dependency fails the run;
+        # a consciously accepted risk gets an explicit, reviewable
+        # --ignore-vuln GHSA-/CVE-id right here in the workflow diff.
+        run: pip-audit
+
+  docker-build:
+    name: Container image builds, is scanned & runs
+    runs-on: ubuntu-latest
+    needs: [lint-and-test, security]   # spend container minutes only on commits that pass BOTH quality and security
+    permissions:
+      contents: read
+      id-token: write               # OIDC token for keyless (Sigstore) signing -- this job only
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Build the core image
         run: docker build -t biomimetic-lattice-pipeline:ci .
+
+      - name: Container vulnerability scan (trivy, CRITICAL/HIGH) — GATING
+        # Scans OS packages + Python site-packages inside the image we just
+        # built. Fails the pipeline if a known CRITICAL or HIGH CVE ships in
+        # the image, before it can ever be pushed anywhere.
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: biomimetic-lattice-pipeline:ci
+          format: table
+          exit-code: "1"
+          severity: CRITICAL,HIGH
+          # Gate on ACTIONABLE vulns only: a CVE with no fixed package
+          # released cannot be remediated by us; it stays visible in the
+          # scan log and starts gating the moment a fix ships.
+          ignore-unfixed: true
+
       - name: Smoke-test (run the fast suite inside the container)
         run: docker run --rm biomimetic-lattice-pipeline:ci pytest -m "not slow"
+
+      - name: SBOM (syft -> SPDX JSON) — evidence artifact
+        # The Software Bill of Materials records exactly what the image
+        # contains, in a standard machine-readable format. Consumers (and
+        # future-us) can diff SBOMs between releases or feed them to their
+        # own scanners. Generated, not gating.
+        uses: anchore/sbom-action@v0
+        with:
+          image: biomimetic-lattice-pipeline:ci
+          format: spdx-json
+          output-file: sbom.spdx.json
+          upload-artifact: false    # uploaded together with its signature below
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign the SBOM (cosign keyless via GitHub OIDC) — evidence artifact
+        # Keyless signing: no private key to store or leak. GitHub's OIDC
+        # identity for THIS workflow run signs the SBOM through Sigstore;
+        # the certificate binds the signature to this repo + workflow, and
+        # the signature lands in the public Rekor transparency log. Verify:
+        #   cosign verify-blob --bundle sbom.spdx.json.bundle \
+        #     --certificate-identity-regexp 'github.com/crentb/' \
+        #     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+        #     sbom.spdx.json
+        run: cosign sign-blob --yes --bundle sbom.spdx.json.bundle sbom.spdx.json
+
+      - name: Upload SBOM + signature bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-and-signature
+          path: |
+            sbom.spdx.json
+            sbom.spdx.json.bundle

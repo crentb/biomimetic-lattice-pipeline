@@ -15,6 +15,7 @@ For each sweep it draws two stacked panels:
 
 Output: runs/sweep_results_summary.png
 """
+
 from __future__ import annotations
 
 import csv

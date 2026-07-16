@@ -36,6 +36,7 @@ Outputs / exit code
 Side effects: writes the .msh on success; reads only the STL. Must run in an
 env that has gmsh (sfepy_env).
 """
+
 from __future__ import annotations
 
 import argparse

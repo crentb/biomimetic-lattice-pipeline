@@ -30,7 +30,7 @@ COPY scripts/ scripts/
 COPY tests/ tests/
 
 # --- 3. Install the package with dev extras (core deps only; no [fea]) -------
-RUN python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+RUN python -m pip install --upgrade pip setuptools wheel "jaraco.context>=6.1.0" && python -m pip install -e ".[dev]"
 
 # --- 4. Default command: run the fast suite to prove the image works ---------
 CMD ["pytest", "-m", "not slow"]

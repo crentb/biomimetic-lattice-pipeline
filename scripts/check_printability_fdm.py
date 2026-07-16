@@ -49,6 +49,7 @@ verdict per STL is the worst status across all checks.
 NOTE on conda env: per the project convention this script must be run
 inside the `base` conda env (it needs trimesh, scipy, numpy, rtree).
 """
+
 from __future__ import annotations
 
 # Standard library
