@@ -1,0 +1,38 @@
+# Scheduled re-verification of main.
+#
+# A green CI run is a point-in-time statement: "no known-vulnerable
+# dependencies / no known CRITICAL-HIGH image CVEs" is only as fresh as the
+# last push. New CVEs are published against unchanged code, so this workflow
+# re-makes the statement on a clock rather than waiting for the next commit.
+#
+# It deliberately re-runs the ENTIRE ci.yml via workflow_call -- the same
+# re-use pattern release.yml uses -- so there is exactly one definition of
+# "green" in this repo and the scheduled scan cannot drift from the gate that
+# protects merges. (pip-audit resolves the environment fresh and trivy pulls
+# the current vulnerability DB at run time, which is what makes a re-run
+# meaningful on identical code.)
+#
+# Note: GitHub disables cron workflows after ~60 days of repo inactivity;
+# the Actions tab shows a re-enable banner if that happens.
+name: Scheduled security re-scan
+
+on:
+  schedule:
+    # Mondays 14:17 UTC (~07:17 Pacific). Minute chosen off the top of the
+    # hour: GitHub delays or drops crons in the :00 rush.
+    - cron: "17 14 * * 1"
+  # Manual trigger button for an on-demand re-scan (e.g., after a CVE lands
+  # in the news) without waiting for Monday.
+  workflow_dispatch:
+
+# Least-privilege default; the called workflow's signing job escalates itself.
+permissions:
+  contents: read
+
+jobs:
+  rescan:
+    name: Re-run the full CI gate on main
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      id-token: write # ci.yml's docker-build job signs its SBOM keylessly
