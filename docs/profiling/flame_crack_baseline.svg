@@ -1,0 +1,738 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="600"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+    .func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+</style>
+<svg class="func_g" x="0.0" y="384" width="1198.9933671965773" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 100.00% (1 1 0.07648882 1.123138792)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="0.0" y="360" width="356.3600908164128" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 29.78% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="0.0038281789083332964" y="336" width="213.9400645508817" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:174:__next__ 17.91% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__next__</text>
+</g></svg>
+<svg class="func_g" x="0.0038281789083332964" y="312" width="22.581453863926743" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:160:fieldnames 1.97% (400001 400001 0.022056285000000002 0.022071160000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">fieldnames</text>
+</g></svg>
+<svg class="func_g" x="23.585282042835075" y="312" width="15.326095383944192" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.len&gt; 1.36% (400000 400000 0.015280477 0.015280477)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.len&gt;</text>
+</g></svg>
+<svg class="func_g" x="39.911377426779275" y="312" width="49.766323493404684" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.next&gt; 4.23% (200001 200001 0.046988472 0.047514952000000006)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.next&gt;</text>
+</g></svg>
+<svg class="func_g" x="214.99989654051794" y="336" width="28.665626789061072" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 2.47% (2 2 0.027765667 0.027765667)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="244.67749827493333" y="336" width="17.125837358488887" height="23"><g>
+    <title>~:0:&lt;method 'append' of 'list' objects&gt; 1.51% (400000 400000 0.016964953 0.016964953)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'append' of 'list' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="357.3600908164128" y="360" width="101.74247759639226" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:152:_rasterize_to_grid 8.56% (1 1 0.091087202 0.09616225)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_rasterize_to_grid</text>
+</g></svg>
+<svg class="func_g" x="357.3604476714939" y="336" width="3.387323809481412" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 0.37% (3 3 2.7500000000000004e-06 0.0041063340000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="357.3604476714939" y="312" width="3.384385631418917" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc 0.37% (7238 7238 0.0012772952734432883 0.004103584)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapfunc</text>
+</g></svg>
+<svg class="func_g" x="357.7510373329205" y="288" width="1.629097442080135" height="23"><g>
+    <title>~:0:&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt; 0.22% (7238 7238 0.0024607147054875778 0.0024607147054875778)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="460.1025684128051" y="360" width="549.7863454852222" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 45.90% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="460.1025684128051" y="336" width="9.714409270396967" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1442:_searchsorted_dispatcher 0.89% (247905 247905 0.010028196000000001 0.010028196000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_searchsorted_dispatcher</text>
+</g></svg>
+<svg class="func_g" x="470.8169776832021" y="336" width="190.38735782111837" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 15.95% (247905 247905 0.042675729 0.179129795)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="470.8169776832021" y="312" width="144.79139754884721" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc 12.15% (240670 240670 0.04247314872655671 0.136454066)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapfunc</text>
+</g></svg>
+<svg class="func_g" x="470.8169776832021" y="288" width="11.988048359487902" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.getattr&gt; 1.08% (240670 240670 0.012156217978930866 0.012156217978930866)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.getattr&gt;</text>
+</g></svg>
+<svg class="func_g" x="483.80502604269" y="288" width="86.42383143175184" height="23"><g>
+    <title>~:0:&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt; 7.29% (240670 240670 0.08182469929451243 0.08182469929451243)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="662.2043355043204" y="336" width="28.83423654114117" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.max&gt; 2.49% (495810 495810 0.027923478 0.027923478)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.max&gt;</text>
+</g></svg>
+<svg class="func_g" x="692.0385720454616" y="336" width="16.360454794349796" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.min&gt; 1.45% (247905 247905 0.01624859 0.01624859)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.min&gt;</text>
+</g></svg>
+<svg class="func_g" x="1011.3060422296318" y="360" width="4.275275409675509" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:4087:percentile 0.44% (1 1 8.124e-06 0.004937416)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">percentile</text>
+</g></svg>
+<svg class="func_g" x="1011.3060422296318" y="336" width="4.26022873271038" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:4560:_quantile_unchecked 0.44% (1 1 3.1670000000000003e-06 0.004923333)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_quantile_unchecked</text>
+</g></svg>
+<svg class="func_g" x="1011.3060422296318" y="312" width="4.256845020010773" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:3857:_ureduce 0.44% (1 1 3.7080000000000003e-06 0.004920166)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_ureduce</text>
+</g></svg>
+<svg class="func_g" x="1011.3060422296318" y="288" width="4.252260393804896" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:4715:_quantile_ureduce_func 0.44% (1 1 5.625e-06 0.004915875)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_quantile_ureduce_func</text>
+</g></svg>
+<svg class="func_g" x="1011.3060422296318" y="264" width="4.244559161996002" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:4788:_quantile 0.44% (1 1 1.9501000000000002e-05 0.004908667)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_quantile</text>
+</g></svg>
+<svg class="func_g" x="1011.319307836477" y="240" width="4.072452443807345" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 0.42% (1 1 3.5840000000000003e-06 0.0047475830000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="1011.319708497122" y="216" width="4.068178730261899" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:348:_unique1d 0.42% (1 1 9.667e-06 0.004743583)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="1011.319708497122" y="192" width="4.0201881324316995" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/__init__.py:707:__getattr__ 0.42% (1 1 3.4990000000000003e-06 0.004698666000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__getattr__</text>
+</g></svg>
+<svg class="func_g" x="1011.319708497122" y="168" width="4.0164497015078195" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1349:_find_and_load 0.42% (1 1 5.0410000000000005e-06 0.004695167)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="1011.3749775239851" y="144" width="3.9551724719389636" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1304:_find_and_load_unlocked 0.41% (3 1 8.876409250176978e-06 0.00463781432166324)</title>
+    <rect height="100%" width="100%" fill="rgb(44, 255, 210)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1011.3749775239851" y="120" width="3.454337111949842" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:911:_load_unlocked 0.37% (3 1 4.700203878513787e-06 0.004169055379667421)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1011.4103445494973" y="96" width="3.4122979486877414" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1020:exec_module 0.37% (3 1 0.00014134866937701686 0.004129708649649078)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">exec_module</text>
+</g></svg>
+<svg class="func_g" x="1011.4103445494973" y="72" width="1.7708792362780015" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:480:_call_with_frames_removed 0.23% (2 1 1.0389092986511601e-06 0.0025934159665245466)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="1011.4107593117383" y="48" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.__import__&gt; 0.11% (1 1 6.718268337002545e-07 0.001288056415745322)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.__import__&gt;</text>
+</g></svg>
+<svg class="func_g" x="1011.4107593117383" y="24" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1349:_find_and_load 0.11% (1 1 2.0133318012062e-06 0.0012873845889116216)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="1011.425906286156" y="0" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1304:_find_and_load_unlocked 0.11% (1 0 2.432659872363024e-06 0.001271034770682273)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1012.7869553495557" y="48" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.exec&gt; 0.12% (1 0 5.520726262432368e-06 0.0013039324430329552)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.exec&gt;</text>
+</g></svg>
+<svg class="func_g" x="1014.1812237857752" y="72" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1093:get_code 0.12% (2 2 1.83372119663226e-05 0.001394944013747514)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_code</text>
+</g></svg>
+<svg class="func_g" x="1016.5813176393074" y="360" width="1.7621918808346204" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2619:_norm_dispatcher 0.23% (55154 55154 0.002585285 0.002585285)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_norm_dispatcher</text>
+</g></svg>
+<svg class="func_g" x="1019.3435095201421" y="360" width="87.43617983430455" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 7.37% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="1019.3435095201421" y="336" width="7.527575691473496" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:187:isComplexType 0.71% (55154 55154 0.005602419 0.007981420000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isComplexType</text>
+</g></svg>
+<svg class="func_g" x="1019.3435095201421" y="312" width="1.5417921995824222" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.issubclass&gt; 0.21% (55154 55154 0.002379001 0.002379001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.issubclass&gt;</text>
+</g></svg>
+<svg class="func_g" x="1027.8710852116155" y="336" width="2.0150279794683676" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.issubclass&gt; 0.25% (55154 55154 0.002821928 0.002821928)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.issubclass&gt;</text>
+</g></svg>
+<svg class="func_g" x="1030.886113191084" y="336" width="2.2519626584278964" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 0.27% (55154 55154 0.003043688 0.003043688)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="1034.1380758495118" y="336" width="16.31950513958572" height="23"><g>
+    <title>~:0:&lt;method 'dot' of 'numpy.ndarray' objects&gt; 1.44% (55154 55154 0.016210263000000003 0.016210263000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'dot' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1051.4575809890973" y="336" width="5.965838961131465" height="23"><g>
+    <title>~:0:&lt;method 'ravel' of 'numpy.ndarray' objects&gt; 0.58% (55154 55154 0.006519706 0.006519706)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'ravel' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1107.7804019961804" y="360" width="6.054299489380266" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.array&gt; 0.59% (27609 27609 0.006602501 0.006602501)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.array&gt;</text>
+</g></svg>
+<svg class="func_g" x="1114.8930579755952" y="360" width="1" height="23"><g>
+    <title>~:0:&lt;method 'max' of 'numpy.ndarray' objects&gt; 0.13% (2 2 3.2510000000000003e-06 0.001513501)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'max' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1114.8930579755952" y="336" width="1" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/_methods.py:41:_amax 0.13% (3 3 1.084042468033533e-06 0.00151025)</title>
+    <rect height="100%" width="100%" fill="rgb(44, 255, 210)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_amax</text>
+</g></svg>
+<svg class="func_g" x="1114.8930579755952" y="312" width="1" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.13% (3 3 0.0015091659575319665 0.0015091659575319665)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1116.5379942928116" y="360" width="1" height="23"><g>
+    <title>~:0:&lt;method 'min' of 'numpy.ndarray' objects&gt; 0.14% (1 1 1.0167000000000001e-05 0.0016215840000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'min' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1116.5379942928116" y="336" width="1" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/_methods.py:45:_amin 0.14% (2 2 1.996849981938823e-06 0.0016114170000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_amin</text>
+</g></svg>
+<svg class="func_g" x="1116.5379942928116" y="312" width="1" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.14% (2 2 0.0016094201500180614 0.0016094201500180614)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="0.0" y="432" width="80.72282652729612" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 6.81% (1 1 0.07648882 1.123138792)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="81.72282652729612" y="432" width="93.55675518299063" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="81.72282652729612" y="456" width="93.55675518299063" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="176.27958171028672" y="432" width="96.32015225104506" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:152:_rasterize_to_grid 8.11% (1 1 0.091087202 0.09616225)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_rasterize_to_grid</text>
+</g></svg>
+<svg class="func_g" x="176.27958171028672" y="456" width="96.32015225104506" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 8.11% (1 1 0.091087202 0.09616225)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="273.5997339613318" y="432" width="300.48988705821597" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="273.5997339613318" y="456" width="300.48988705821597" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="575.092068788981" y="432" width="22.565560991679614" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:160:fieldnames 1.96% (400001 400001 0.022056285000000002 0.022071160000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">fieldnames</text>
+</g></svg>
+<svg class="func_g" x="575.092068788981" y="456" width="22.565560991679614" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:174:__next__ 1.96% (400001 400001 0.022056285000000002 0.022071160000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__next__</text>
+</g></svg>
+<svg class="func_g" x="575.092068788981" y="480" width="22.565560991679614" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 10.36% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="575.092068788981" y="504" width="22.565560991679618" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="598.6576297806606" y="432" width="123.26619180960606" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:174:__next__ 10.36% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__next__</text>
+</g></svg>
+<svg class="func_g" x="598.6576297806606" y="456" width="123.26619180960606" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 10.36% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="598.6576297806606" y="480" width="123.26619180960606" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="723.7242838636155" y="432" width="45.74421628551968" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc 3.90% (247908 247908 0.043750444 0.14055765)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapfunc</text>
+</g></svg>
+<svg class="func_g" x="723.7242838636155" y="456" width="45.74421628551968" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 3.90% (247908 247908 0.043750444 0.14055765)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="724.7718249008778" y="480" width="44.69667524825741" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 3.80% (247905 247905 0.042675729 0.179129795)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="724.7718249008778" y="504" width="44.69667524825741" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="770.4709938609889" y="432" width="9.714766125478011" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1442:_searchsorted_dispatcher 0.89% (247908 247908 0.01002853 0.01002853)</title>
+    <rect height="100%" width="100%" fill="rgb(214, 214, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_searchsorted_dispatcher</text>
+</g></svg>
+<svg class="func_g" x="770.4713507160699" y="456" width="9.714409270396967" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 0.89% (247905 247905 0.010028196000000001 0.010028196000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="770.4713507160699" y="480" width="9.714409270396969" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="781.185759986467" y="432" width="44.598898450333664" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 3.80% (247908 247908 0.042678479000000005 0.183236129)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="782.2076343738546" y="456" width="43.57702406294605" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 3.80% (247905 247905 0.042675729 0.179129795)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="782.2076343738546" y="480" width="43.57702406294605" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="827.9828089872642" y="432" width="4.985783491891073" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:187:isComplexType 0.50% (55154 55154 0.005602419 0.007981420000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isComplexType</text>
+</g></svg>
+<svg class="func_g" x="827.9828089872642" y="456" width="4.985783491891073" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 0.50% (55154 55154 0.005602419 0.007981420000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="827.9828089872642" y="480" width="4.985783491891072" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="833.9685924791553" y="432" width="1.7621918808346204" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2619:_norm_dispatcher 0.23% (55154 55154 0.002585285 0.002585285)</title>
+    <rect height="100%" width="100%" fill="rgb(230, 230, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_norm_dispatcher</text>
+</g></svg>
+<svg class="func_g" x="833.9685924791553" y="456" width="1.7621918808346204" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 0.23% (55154 55154 0.002585285 0.002585285)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="836.7307843599898" y="432" width="48.35626940421762" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="836.7307843599898" y="456" width="48.35626940421763" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="888.1830207141556" y="432" width="12.417319402214318" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.getattr&gt; 1.12% (248081 248081 0.012557996 0.012564496000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.getattr&gt;</text>
+</g></svg>
+<svg class="func_g" x="888.1847100934427" y="456" width="12.371716840221211" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc 1.11% (247908 247908 0.012521792 0.012521792)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapfunc</text>
+</g></svg>
+<svg class="func_g" x="888.1847100934427" y="480" width="12.371716840221211" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 3.90% (247908 247908 0.043750444 0.14055765)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="888.4843711690124" y="504" width="12.072055764651486" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 3.80% (247905 247905 0.042675729 0.179129795)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="888.4843711690124" y="528" width="12.072055764651486" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="901.6287015478858" y="432" width="4.577883176259522" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.issubclass&gt; 0.46% (110559 110559 0.0052206430000000005 0.0052206430000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(214, 214, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.issubclass&gt;</text>
+</g></svg>
+<svg class="func_g" x="901.6497196711025" y="456" width="1.5417921995824226" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:187:isComplexType 0.21% (55154 55154 0.002379001 0.002379001)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isComplexType</text>
+</g></svg>
+<svg class="func_g" x="901.6497196711025" y="480" width="1.5417921995824226" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 0.50% (55154 55154 0.005602419 0.007981420000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="901.6497196711025" y="504" width="1.5417921995824226" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="904.191511870685" y="456" width="2.015027979468368" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 0.25% (55154 55154 0.002821928 0.002821928)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="904.191511870685" y="480" width="2.015027979468368" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="907.2065847241454" y="432" width="15.395404333367463" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.len&gt; 1.37% (401821 401825 0.015345347 0.015345889000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.len&gt;</text>
+</g></svg>
+<svg class="func_g" x="907.2065847241454" y="456" width="15.325297489108916" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:174:__next__ 1.36% (400000 400000 0.015280477 0.015280477)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__next__</text>
+</g></svg>
+<svg class="func_g" x="907.2065847241454" y="480" width="15.325297489108916" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 10.36% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="907.2065847241454" y="504" width="15.325297489108912" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="923.601989057513" y="432" width="28.83708817650437" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.max&gt; 2.49% (495817 495817 0.027926147000000002 0.027929269000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.max&gt;</text>
+</g></svg>
+<svg class="func_g" x="923.6022561347518" y="456" width="28.830901599346547" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 2.49% (495810 495810 0.027923478 0.027923478)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="923.6022561347518" y="480" width="28.830901599346547" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="953.4390772340172" y="432" width="16.39342328906775" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.min&gt; 1.45% (248650 248650 0.016279447000000002 0.016279447000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(214, 214, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.min&gt;</text>
+</g></svg>
+<svg class="func_g" x="953.4390772340172" y="456" width="16.3604547943498" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 1.45% (247905 247905 0.01624859 0.01624859)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="953.4390772340172" y="480" width="16.3604547943498" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="970.832500523085" y="432" width="49.21352185158639" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.next&gt; 4.18% (200002 200002 0.046997555 0.047529827000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.next&gt;</text>
+</g></svg>
+<svg class="func_g" x="970.8482154159151" y="456" width="49.19780695875622" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/csv.py:174:__next__ 4.18% (200001 200001 0.046988472 0.047514952000000006)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__next__</text>
+</g></svg>
+<svg class="func_g" x="970.8482154159151" y="480" width="49.19780695875622" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 10.36% (200001 200001 0.11630746 0.20117404900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="970.8482154159151" y="504" width="49.19780695875622" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1021.6145202979138" y="432" width="6.057994114740305" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.array&gt; 0.59% (27619 27619 0.006605959000000001 0.006605959000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.array&gt;</text>
+</g></svg>
+<svg class="func_g" x="1021.6145202979138" y="456" width="6.054299489380269" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 0.59% (27609 27609 0.006602501 0.006602501)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1028.6828012411581" y="432" width="31.92083960664028" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 2.74% (55157 55157 0.030812397000000002 0.030812397000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(166, 166, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="1028.6860514003095" y="456" width="28.665626789061072" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 2.47% (2 2 0.027765667 0.027765667)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="1028.6860514003095" y="480" width="28.665626789061072" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1058.3516781893707" y="456" width="2.2519626584278964" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 0.27% (55154 55154 0.003043688 0.003043688)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="1058.3516781893707" y="480" width="2.2519626584278973" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1062.1137651861522" y="432" width="17.168074469458528" height="23"><g>
+    <title>~:0:&lt;method 'append' of 'list' objects&gt; 1.51% (400421 400421 0.017004485 0.017004485)</title>
+    <rect height="100%" width="100%" fill="rgb(166, 166, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'append' of 'list' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1062.139800649071" y="456" width="17.125837358488887" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:136:_load_elements 1.51% (400000 400000 0.016964953 0.016964953)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_elements</text>
+</g></svg>
+<svg class="func_g" x="1062.139800649071" y="480" width="17.125837358488887" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 7.88% (1 1 0.08850078900000001 0.33447266600000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1080.5292684381811" y="432" width="16.31950513958572" height="23"><g>
+    <title>~:0:&lt;method 'dot' of 'numpy.ndarray' objects&gt; 1.44% (55154 55154 0.016210263000000003 0.016210263000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'dot' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1080.5292684381811" y="456" width="16.31950513958572" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 1.44% (55154 55154 0.016210263000000003 0.016210263000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="1080.5292684381811" y="480" width="16.31950513958572" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1098.0916668818372" y="432" width="5.966284495768578" height="23"><g>
+    <title>~:0:&lt;method 'ravel' of 'numpy.ndarray' objects&gt; 0.58% (55156 55156 0.006520123 0.006520123)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'ravel' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1098.0921124164745" y="456" width="5.965838961131465" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2623:norm 0.58% (55154 55154 0.006519706 0.006519706)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">norm</text>
+</g></svg>
+<svg class="func_g" x="1098.0921124164745" y="480" width="5.965838961131465" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 4.11% (55154 55154 0.046195206 0.082772211)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="432" width="1" height="23"><g>
+    <title>~:0:&lt;method 'read' of '_io.BufferedReader' objects&gt; 0.11% (3 3 0.001258042 0.001258042)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'read' of '_io.BufferedReader' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="456" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1214:get_data 0.11% (3 3 0.001258042 0.001258042)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_data</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="480" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1093:get_code 0.00% (3 3 7.082e-06 0.001383916)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_code</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="504" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1020:exec_module 0.00% (3 3 2.5752e-05 0.0019590000000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">exec_module</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="528" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:911:_load_unlocked 0.01% (3 1 0.000156209 0.004563875)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="552" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1304:_find_and_load_unlocked 0.00% (3 1 5.169e-06 0.004584875)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1105.057951377606" y="576" width="1" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1349:_find_and_load 0.00% (3 1 8.916e-06 0.0046585)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="1106.4020791616408" y="432" width="2.368576274657324" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.28% (19 19 0.0031528330000000003 0.0031528330000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1106.4020791616408" y="456" width="1" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/_methods.py:41:_amax 0.13% (3 3 0.001510499 0.001510499)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_amax</text>
+</g></svg>
+<svg class="func_g" x="1106.4020791616408" y="480" width="1" height="23"><g>
+    <title>~:0:&lt;method 'max' of 'numpy.ndarray' objects&gt; 0.00% (3 3 1.085e-06 0.001511584)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'max' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1106.4020791616408" y="504" width="1" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 0.00% (2 2 3.2510000000000003e-06 0.001513501)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1108.0159391708116" y="456" width="1" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/_methods.py:45:_amin 0.14% (2 2 0.001611959 0.001611959)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_amin</text>
+</g></svg>
+<svg class="func_g" x="1108.0159391708116" y="480" width="1" height="23"><g>
+    <title>~:0:&lt;method 'min' of 'numpy.ndarray' objects&gt; 0.00% (2 2 2.0000000000000003e-06 0.001613959)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'min' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1108.0159391708116" y="504" width="1" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 0.00% (1 1 1.0167000000000001e-05 0.0016215840000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1109.8085793018715" y="432" width="89.05292887383196" height="23"><g>
+    <title>~:0:&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt; 7.50% (247908 247908 0.084285414 0.084285414)</title>
+    <rect height="100%" width="100%" fill="rgb(166, 166, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'searchsorted' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1109.8085793018715" y="456" width="89.05292887383196" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc 7.50% (247908 247908 0.084285414 0.084285414)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapfunc</text>
+</g></svg>
+<svg class="func_g" x="1109.8085793018715" y="480" width="89.05292887383196" height="23"><g>
+    <title>/opt/anaconda3/lib/python3.13/site-packages/numpy/_core/fromnumeric.py:1446:searchsorted 3.90% (247908 247908 0.043750444 0.14055765)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">searchsorted</text>
+</g></svg>
+<svg class="func_g" x="1109.8085793018715" y="504" width="1.0180922051360182" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:152:_rasterize_to_grid 0.00% (3 3 2.7500000000000004e-06 0.0041063340000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_rasterize_to_grid</text>
+</g></svg>
+<svg class="func_g" x="1109.8085793018715" y="528" width="1.0180922051360182" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 8.11% (1 1 0.091087202 0.09616225)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+<svg class="func_g" x="1111.8266715070076" y="504" width="87.03483666869595" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:188:_trilinear 3.80% (247905 247905 0.042675729 0.179129795)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_trilinear</text>
+</g></svg>
+<svg class="func_g" x="1111.8266715070076" y="528" width="87.03483666869595" height="23"><g>
+    <title>/Users/cameronrenteria/Desktop/biomimetic-lattice-pipeline/biomimetic_pipeline/metrics/crack_deflection.py:45:compute 25.12% (82635 82635 0.282180716 0.515510775)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">compute</text>
+</g></svg>
+</svg>
