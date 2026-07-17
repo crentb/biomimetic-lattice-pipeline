@@ -1,0 +1,31 @@
+# Dependabot: automated dependency-update PRs for the three ecosystems this
+# repo actually ships from. Each PR still has to pass the full CI gate
+# (including pip-audit and trivy), so Dependabot proposes and CI disposes --
+# this automates the manual notice -> bump -> verify -> PR chase (e.g. the
+# black CVE-2026-32274 pin bump) without weakening any gate.
+version: 2
+updates:
+  # Python dependencies (pyproject.toml): the supply chain the package
+  # imports at runtime and in dev.
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+
+  # Base image in the Dockerfile: OS-level CVEs surface here first; a bumped
+  # digest/tag is exactly what un-sticks trivy findings once fixes ship.
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+
+  # The Actions in .github/workflows themselves (checkout, setup-python,
+  # trivy-action, cosign-installer, ...): pinned versions age like any other
+  # dependency.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
