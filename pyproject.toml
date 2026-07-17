@@ -16,7 +16,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name            = "biomimetic-lattice-pipeline"
-version         = "0.1.0"
+version         = "0.2.0"
 description     = "Micro-CT-driven generation of biomimetic enamel lattices with FEA-based design optimization."
 readme          = "README.md"
 requires-python = ">=3.10"
