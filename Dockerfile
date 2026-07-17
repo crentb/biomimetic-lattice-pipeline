@@ -11,7 +11,7 @@
 # full FEA path is future work; this image covers the importable, unit-tested
 # logic (and is what CI builds + smoke-tests).
 # =============================================================================
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # Reproducible, quiet Python: unbuffered output, no .pyc files, no pip cache.
 ENV PYTHONUNBUFFERED=1 \
