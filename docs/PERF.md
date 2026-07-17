@@ -7,8 +7,10 @@ streamline-tracing tortuosity metric — profiled with cProfile on a
 fixed-seed synthetic `element_results_compression.csv` at genuine FEA
 post-processing scale: 200,000 element centroids (50×50×80 jittered
 lattice over a 10×10×20 mm box) with a plausible max-principal-stress
-field. Flame graphs rendered with flameprof; Apple-Silicon macOS,
-Python 3.13.
+field. Flame graphs rendered from the cProfile data via flameprof's
+collapsed-stack export and flamegraph.pl (classic bottom-up layout; the
+SVGs scale to fit the browser window with click-to-zoom intact);
+Apple-Silicon macOS, Python 3.13.
 
 The metric runs once per design evaluation, so per-call cost is a
 per-trial tax in sweep and closed-loop optimization campaigns. (The
@@ -59,5 +61,9 @@ zoom):
 
 - [`profiling/flame_crack_baseline.svg`](profiling/flame_crack_baseline.svg)
 - [`profiling/flame_crack_after.svg`](profiling/flame_crack_after.svg)
+
+The matching `*.collapsed.txt` files alongside them import directly into
+[speedscope](https://www.speedscope.app/) for interactive exploration
+(fully client-side; nothing is uploaded).
 
 Numbers are from the machine above; expect variation elsewhere.
