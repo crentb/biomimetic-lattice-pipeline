@@ -4,6 +4,8 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%E2%80%933.12-blue.svg)](pyproject.toml)
 
+![The biomimetic lattice pipeline: measurement, design, and realization](docs/figures/figure1_pipeline.png)
+
 Micro-CT–driven generation of **biomimetic enamel lattices** with finite-element-based design optimization.
 
 The pipeline turns measured three-dimensional rod geometry from synchrotron micro-CT of tooth enamel into
@@ -32,6 +34,12 @@ orchestration/ single-run, sweep, Optuna optimization, and closed-loop drivers
 reporting/     LaTeX/PDF report generation
 geometry/      CadQuery + SfePy CAD/mesh/FEA engine, driven by generators/ + fea/ via subprocess (conda)
 ```
+
+The full pipeline end to end — the JSON-schema contracts at each seam, the mapping that turns biology into geometry, and the closed-loop inversion that emits what to go measure in a real specimen:
+
+![Biomimetic pipeline, end to end](docs/figures/biomimetic_pipeline_detailed.png)
+
+Full schematic as a PDF: [docs/biomimetic_pipeline_schematic.pdf](docs/biomimetic_pipeline_schematic.pdf)
 
 ## Install
 
