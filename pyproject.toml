@@ -59,7 +59,7 @@ dependencies = [
 fea = ["pyvista>=0.43", "gmsh>=4.11", "meshio>=5.3", "scikit-image>=0.21"]
 # Dev tools are PINNED so CI and local agree exactly (unpinned black/ruff drift
 # their stable style across releases and break the format check non-deterministically).
-dev = ["pytest>=8.0", "pytest-cov>=4.1", "ruff==0.14.10", "black==26.3.1", "mypy==1.17.1", "pre-commit>=3.7"]
+dev = ["pytest>=8.0", "pytest-cov>=4.1", "ruff==0.16.0", "black==26.3.1", "mypy==1.17.1", "pre-commit>=3.7"]
 
 [project.urls]
 # Public repository under the crentb GitHub account (github.com/crentb).
