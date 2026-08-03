@@ -1,0 +1,17 @@
+# Accepted risks — TEMPORARY. Remove when pip > 26.2 ships updated vendored deps.
+#
+# Both findings are pip's OWN vendored copies, not application dependencies.
+# pip 26.2 (2026-07-29) began shipping a CycloneDX SBOM of its vendored libs
+# (pip/_vendor/bom.cdx.json); trivy ingests in-image SBOMs, so these internal
+# copies became visible to the scan even though nothing in this project
+# installs or imports them. Verified: a bare `python:3.12-slim` image with
+# only `pip install --upgrade pip` reproduces exactly these two findings.
+
+# msgpack 1.1.2 vendored inside pip (pip/_vendor/msgpack), used only by pip's
+# own HTTP cache; the Unpacker-reuse out-of-bounds read requires feeding it
+# attacker-controlled msgpack streams, which never happens in this image.
+GHSA-6v7p-g79w-8964
+
+# setuptools 70.3.0: pip vendors only the pkg_resources subpackage — the
+# vulnerable PackageIndex/easy_install code path is not shipped in the image.
+CVE-2025-47273
