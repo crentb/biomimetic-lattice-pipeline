@@ -1,94 +1,142 @@
 # biomimetic-lattice-pipeline
 
-[![CI](https://github.com/crentb/biomimetic-lattice-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/crentb/biomimetic-lattice-pipeline/actions/workflows/ci.yml)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.10%E2%80%933.12-blue.svg)](pyproject.toml)
+From synchrotron micro-computed tomography (micro-CT) of tooth enamel to biomimetic lattices: parametric computer-aided design (CAD), finite-element analysis (FEA), and closed-loop design optimization.
 
-![The biomimetic lattice pipeline: measurement, design, and realization](docs/figures/figure1_pipeline.png)
+[![CI](https://github.com/crentb/biomimetic-lattice-pipeline/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/crentb/biomimetic-lattice-pipeline/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/biomimetic-lattice-pipeline)](https://pypi.org/project/biomimetic-lattice-pipeline/)
+[![Python](https://img.shields.io/badge/python-3.10--3.14-blue)](pyproject.toml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21148570.svg)](https://doi.org/10.5281/zenodo.21148570)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-Micro-CT–driven generation of **biomimetic enamel lattices** with finite-element-based design optimization.
+![Pipeline overview: measurement, design, and realization stages, with an Optuna optimization loop that maps the best designs back into measurement targets](docs/figures/pipeline_overview.png)
 
-The pipeline turns measured three-dimensional rod geometry from synchrotron micro-CT of tooth enamel into
-**parametric CAD lattices**, runs **linear-elastic finite-element analysis (FEA)** on them, scores the results
-against pluggable **objectives**, and can drive a **closed-loop Optuna optimization** that searches the
-manufacturability-constrained design space — emitting a metrics JSON and a LaTeX/PDF report per run.
+The pipeline turns measured three-dimensional rod geometry from synchrotron micro-CT of tooth enamel into **parametric CAD lattices**, runs **linear-elastic FEA** on them, scores the results against pluggable **objectives**, and can drive a **closed-loop Optuna optimization** over the manufacturability-constrained design space. Every run emits a metrics JSON and a LaTeX/PDF report.
 
-> This is the software behind the *Matter* manuscript *"Translating Helically Decussated Enamel into
-> Damage-Tolerant Bioinspired Lattices"* (Renteria et al., in preparation).
+**Associated manuscript:** C. B. Renteria, J. R. Grimm, A. Yunker, D. Y. Parkinson, D. D. Arola, "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices," *Matter* (in preparation).
 
 ## Architecture
 
-![pipeline architecture](docs/figures/01_architecture.png)
+![Pipeline architecture](docs/figures/01_architecture.png)
 
-A single canonical `morphometrics.json` is the only coupling point between stages, so each component can be
-swapped independently:
+A single canonical `morphometrics.json` is the only coupling point between stages, so each component can be replaced independently, and a JSON Schema contract is validated at every seam. The one-page end-to-end schematic, with the module behind each stage, is in [docs/biomimetic_pipeline_schematic.pdf](docs/biomimetic_pipeline_schematic.pdf).
 
-```
-ingest/        measured micro-CT morphometrics  ->  canonical morphometrics.json
-mapping/       morphometrics  ->  CAD parameters (deterministic, with logged manufacturability clamps)
-generators/    parametric continuous-twist CAD family + rod-by-rod digital-twin variants
-fea/           strain-solver driving SfePy to a target representative stress
-metrics/       crack-deflection streamlines, biomimicry score, SCF, toughness, ...
-objectives/    YAML-configured, registry-based scoring (crack deflection, toughness, ...)
-orchestration/ single-run, sweep, Optuna optimization, and closed-loop drivers
-reporting/     LaTeX/PDF report generation
-geometry/      CadQuery + SfePy CAD/mesh/FEA engine, driven by generators/ + fea/ via subprocess (conda)
+## Installation
+
+From PyPI:
+
+```bash
+pip install biomimetic-lattice-pipeline            # design, mapping, analytics, optimization
+pip install "biomimetic-lattice-pipeline[fea]"     # + PyVista, Gmsh, meshio, scikit-image
 ```
 
-The full pipeline end to end — the JSON-schema contracts at each seam, the mapping that turns biology into geometry, and the closed-loop inversion that emits what to go measure in a real specimen:
+As a signed container image:
 
-![Biomimetic pipeline, end to end](docs/figures/biomimetic_pipeline_detailed.png)
+```bash
+docker pull ghcr.io/crentb/biomimetic-lattice-pipeline:v0.2.0
+```
 
-Full schematic as a PDF: [docs/biomimetic_pipeline_schematic.pdf](docs/biomimetic_pipeline_schematic.pdf)
-
-## Install
+From source, for development:
 
 ```bash
 git clone https://github.com/crentb/biomimetic-lattice-pipeline.git
 cd biomimetic-lattice-pipeline
-python -m pip install -e ".[dev]"      # core runtime + dev tools (pytest, ruff, black)
+python -m pip install -e ".[dev]"       # core + pytest, ruff, black, mypy, pre-commit
 ```
 
-Optional heavy geometry/visualization extras:
+> **Full FEA** additionally requires **CadQuery** and **SfePy**, installed with conda because they are difficult to pip-install across platforms. The CAD and FEA engine ships in this repository under `geometry/` (see [geometry/README.md](geometry/README.md)). The default install and CI exercise the pure-Python design and analytics logic; the CAD and FEA path is gated behind the `slow` pytest marker.
 
-```bash
-python -m pip install -e ".[fea]"      # pyvista, gmsh, meshio, scikit-image
-```
-
-> **Full FEA** additionally requires **CadQuery** and **SfePy** (installed via conda, as they are awkward to
-> pip-install across platforms); the CAD/FEA engine itself ships in this repo under `geometry/`
-> (see `geometry/README.md`). The default install and the CI exercise the **pure-Python design and analytics
-> logic**; the heavy FEA/CAD path is gated behind the `slow` pytest marker.
-
-## Quickstart
+## Quick start
 
 ```bash
 # End-to-end single-specimen run: morphometrics -> CAD -> mesh -> FEA -> metrics -> report
 python scripts/run_pipeline.py --morphometrics path/to/morphometrics.json \
     --run-name demo --objective crack_deflection --model-type continuous_twist
 
-# Parametric sweep over a single free CAD parameter
+# Parametric sweep over one free CAD parameter
 python scripts/run_sweep.py --morphometrics path/to/morphometrics.json \
     --run-name sweep_layers --param N_BRIDGE_LAYERS --values 4 6 8
 
-# Closed-loop Optuna optimization of an objective
+# Optuna optimization of an objective
 python scripts/run_optimize.py --morphometrics path/to/morphometrics.json \
     --run-name opt_cd --objective crack_deflection --n-trials 30
+
+# Closed loop: optimize, then map the top designs back into morphometric targets
+python scripts/run_closed_loop.py --run-name closed_cd \
+    --objective crack_deflection --n-trials 30 --top-k 5
 ```
 
-(See `scripts/` for the full set of CLI entry points.)
+The closed loop writes `biomimicry_targets.json`: the rod diameters, band widths, wavelengths, and directions to look for in a real specimen. The remaining scripts in `scripts/` are sweep, diagnostic, and printability utilities.
 
-## Testing
+## Repository layout
+
+```text
+biomimetic_pipeline/
+  ingest/          measured micro-CT morphometrics -> canonical morphometrics.json
+  mapping/         morphometrics -> CAD parameters (deterministic, with logged manufacturability clamps)
+  generators/      parametric continuous-twist CAD family and rod-by-rod digital-twin variants
+  fea/             strain solver driving SfePy to a target representative stress
+  metrics/         crack-deflection streamlines, biomimicry score, stress concentration, toughness
+  objectives/      registry-based scoring (crack deflection, toughness, ...)
+  config/          objective definitions, one YAML file per objective
+  orchestration/   single-run, sweep, Optuna optimization, and closed-loop drivers; provenance
+  reporting/       LaTeX/PDF report generation
+  schemas/         JSON Schema contracts between stages
+geometry/          CadQuery + SfePy CAD, mesh, and FEA engine, driven by generators/ and fea/
+docs/              design document, parameter report, provenance, performance, figures
+scripts/           command-line entry points and analysis utilities
+tests/             fast pure-Python suite; CAD/FEA integration tests are marked slow
+```
+
+## Documentation
+
+| Document | Contents |
+|---|---|
+| [PIPELINE.pdf](docs/PIPELINE.pdf) | Design document: stages, contracts, mappings, and tests |
+| [MODEL_PARAMETER_REPORT.pdf](docs/MODEL_PARAMETER_REPORT.pdf) | Every CAD parameter, its source, and its measured or clamped value |
+| [PROVENANCE.md](docs/PROVENANCE.md) | Stage-boundary verification, hash-linked artifact chains, and signing |
+| [PERF.md](docs/PERF.md) | Profiling of the crack-deflection metric, with flame graphs |
+| [biomimetic_pipeline_schematic.pdf](docs/biomimetic_pipeline_schematic.pdf) | One-page end-to-end schematic |
+
+## Testing and continuous integration
 
 ```bash
-pytest -m "not slow"      # fast, pure-Python logic tests (what CI runs)
-pytest                    # everything, including the FEA integration test (needs the conda FEA stack)
+pytest -m "not slow"    # fast, pure-Python logic tests (what CI runs)
+pytest                  # everything, including the FEA integration test (needs the conda FEA stack)
+```
+
+Every push and pull request runs one gate, defined in [ci.yml](.github/workflows/ci.yml):
+
+- **Quality:** ruff, black, mypy (advisory), and pytest with coverage on Python 3.10 to 3.14.
+- **Security (blocking):** gitleaks secret detection over the full history, bandit static analysis at medium severity and above, and pip-audit against known vulnerabilities.
+- **Container:** image build, a trivy scan that blocks on fixable critical and high findings, the test suite run inside the image, and an SPDX software bill of materials signed keylessly with cosign.
+
+The same gate re-runs weekly on `main` ([scheduled-scan.yml](.github/workflows/scheduled-scan.yml)), so a newly published vulnerability surfaces without a code change. A version tag re-runs it on the tagged commit before [release.yml](.github/workflows/release.yml) publishes to PyPI through Trusted Publishing (no stored tokens) and pushes a scanned, cosign-signed image with SLSA build provenance to the GitHub Container Registry. To verify a published image:
+
+```bash
+cosign verify ghcr.io/crentb/biomimetic-lattice-pipeline:v0.2.0 \
+  --certificate-identity-regexp 'github.com/crentb/' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+gh attestation verify oci://ghcr.io/crentb/biomimetic-lattice-pipeline:v0.2.0 --owner crentb
+```
+
+To report a vulnerability, see [SECURITY.md](SECURITY.md).
+
+## Citation
+
+Please cite the software and the associated manuscript. GitHub's "Cite this repository" button reads [CITATION.cff](CITATION.cff).
+
+```bibtex
+@software{renteria_biomimetic_lattice_pipeline,
+  author    = {Renteria, Cameron B.},
+  title     = {biomimetic-lattice-pipeline},
+  version   = {0.2.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21148570},
+  url       = {https://github.com/crentb/biomimetic-lattice-pipeline}
+}
 ```
 
 ## License
 
-Apache-2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
-
-## Citation
-
-A `CITATION.cff` will accompany the first tagged release; until then, please cite the *Matter* manuscript above.
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
