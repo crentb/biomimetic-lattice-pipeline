@@ -3,7 +3,7 @@
 #
 # Runs on every push / pull-request to main.
 #
-# QUALITY (as before), across Python 3.10-3.12:
+# QUALITY (as before), across Python 3.10-3.14:
 #   1. install the package (core runtime + dev tools). The heavy FEA/CAD stack
 #      (SfePy / CadQuery / gmsh, the conda cad_env/sfepy_env) is intentionally
 #      NOT installed here -- those integration tests are marked `slow` and
@@ -24,7 +24,7 @@
 #      any consumer can verify WHAT was built and BY WHICH workflow.
 #
 # A green run therefore certifies: the package installs cleanly, imports, is
-# lint- and format-clean, passes its tests on three Python versions, contains
+# lint- and format-clean, passes its tests on five Python versions, contains
 # no detected secrets, no medium+ SAST findings, no known-vulnerable
 # dependencies, and ships in an image free of known CRITICAL/HIGH CVEs --
 # with a signed SBOM naming exactly what is inside.
@@ -60,12 +60,12 @@ jobs:
     strategy:
       fail-fast: false            # report every Python version's result, not just the first failure
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -94,12 +94,12 @@ jobs:
     name: Security scans (secrets, SAST, dependency audit)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0          # gitleaks scans the FULL history, not just the tip
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -109,10 +109,10 @@ jobs:
         # forever once pushed. Pinned release binary; --redact keeps any hit
         # out of the public log.
         run: |
-          GITLEAKS_VERSION=8.18.4
+          GITLEAKS_VERSION=8.30.1
           curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
             | tar -xz gitleaks
-          ./gitleaks detect --source . --redact --no-banner -v
+          ./gitleaks git --redact --no-banner -v .
 
       - name: Install package + scanners
         run: |
@@ -141,7 +141,7 @@ jobs:
       contents: read
       id-token: write               # OIDC token for keyless (Sigstore) signing -- this job only
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build the core image
         run: docker build -t biomimetic-lattice-pipeline:ci .
@@ -191,7 +191,7 @@ jobs:
         run: cosign sign-blob --yes --bundle sbom.spdx.json.bundle sbom.spdx.json
 
       - name: Upload SBOM + signature bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sbom-and-signature
           path: |

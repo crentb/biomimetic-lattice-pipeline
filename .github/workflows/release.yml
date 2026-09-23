@@ -46,7 +46,7 @@ permissions:
 jobs:
   # ---------------------------------------------------------------------------
   # 1. Re-prove the tagged commit against the full CI gate.
-  #    Quality (ruff/black/mypy/pytest on 3.10-3.12), security (gitleaks/bandit/
+  #    Quality (ruff/black/mypy/pytest on 3.10-3.14), security (gitleaks/bandit/
   #    pip-audit), container build + trivy + signed SBOM -- all of ci.yml.
   # ---------------------------------------------------------------------------
   verify:
@@ -70,10 +70,10 @@ jobs:
       id-token: write # the OIDC identity PyPI verifies; no password is sent
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -109,10 +109,10 @@ jobs:
       attestations: write # store the SLSA attestation against the image
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Log in to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -168,7 +168,7 @@ jobs:
         # Machine-verifiable answer to "what source and what builder produced
         # this exact image?" -- attached to the image in the registry, so it
         # travels with the artifact rather than living only in these logs.
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.push.outputs.digest }}
