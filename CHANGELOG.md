@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-23
+
 ### Changed
 - Continuous integration: GitHub Actions updated to their current major versions (Node 24
   runtimes), gitleaks 8.30.1, and the test matrix extended to Python 3.10 through 3.14.
@@ -15,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   pinned to the same versions.
 - README reorganized: status badges (CI, PyPI, Python, DOI, license), installation from
   PyPI and the GitHub Container Registry, a testing and CI section, and a citation entry.
+- README links are absolute URLs, so figures and linked files also render on PyPI.
 - New README overview figure; the end-to-end schematic trimmed to one page, with its
   LaTeX source in `docs/figures/src/`.
 
