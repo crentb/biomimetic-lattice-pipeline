@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Continuous integration: GitHub Actions updated to their current major versions (Node 24
+  runtimes), gitleaks 8.30.1, and the test matrix extended to Python 3.10 through 3.14.
+- Container base image `python:3.14-slim`.
+- Development tools ruff 0.16.8, black 26.5.1, and mypy 2.3.1, with the pre-commit hooks
+  pinned to the same versions.
+- README reorganized: status badges (CI, PyPI, Python, DOI, license), installation from
+  PyPI and the GitHub Container Registry, a testing and CI section, and a citation entry.
+- New README overview figure; the end-to-end schematic trimmed to one page, with its
+  LaTeX source in `docs/figures/src/`.
+
+### Added
+- `SECURITY.md`: supported versions and private vulnerability reporting through GitHub.
+- `doi` in `CITATION.cff` (Zenodo concept DOI).
+
+### Fixed
+- README citation section, which predated the first tagged release.
+
+### Removed
+- A LaTeX build log tracked under `docs/`; `*.log` is now ignored.
+
 ## [0.2.0] - 2026-07-16
 
 ### Added

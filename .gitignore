@@ -33,6 +33,7 @@ runs/
 
 # --- LaTeX auxiliary files (keep .tex/.pdf where intentionally committed) --
 *.aux
+*.log
 *.fls
 *.fdb_latexmk
 *.synctex.gz

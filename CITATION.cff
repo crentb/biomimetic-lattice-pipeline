@@ -14,6 +14,7 @@ authors:
 version: "0.2.0"
 date-released: "2026-07-16"
 license: "Apache-2.0"
+doi: "10.5281/zenodo.21148570"
 repository-code: "https://github.com/crentb/biomimetic-lattice-pipeline"
 keywords:
   - "bioinspired design"
