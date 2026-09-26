@@ -1,8 +1,8 @@
 # Matter manuscript (2026): figure, table, and check scripts
 
 This folder holds the scripts behind the figures, Supplemental tables, and measurement checks of the
-manuscript *Machine-Learning Translation of Tooth Enamel Microarchitecture into Additively
-Manufactured Lattices with Programmable Mechanics* (Renteria, Grimm, Yunker, Parkinson, Arola;
+manuscript *Automated Translation of Enamel Microarchitecture from Synchrotron Imaging to
+Additively Manufactured Lattices* (Renteria, Grimm, Yunker, Parkinson, Arola;
 submitted to *Matter*). The analysis and campaign drivers used by the paper are package-level
 scripts in [`../../scripts/`](../../scripts/):
 
@@ -19,7 +19,11 @@ scripts in [`../../scripts/`](../../scripts/):
 
 | Path | Contents |
 |---|---|
-| `measurement/track_rods_piv_signcorrected.py` | PIV-guided rod tracking with the displacement sign corrected (Supplemental Section S1). `--sign +1` reproduces the original trajectories exactly |
+| `measurement/validate_stack_100.py` | rod instance detection on the U-Net masks: Gaussian smoothing, CLAHE, Otsu, morphological cleaning, distance-transform watershed, and the area/circularity/solidity acceptance criteria |
+| `measurement/track_rods_piv.py` | PIV displacement fields (64-px windows, 50 % overlap, ×10 upsampling) and the original forward tracking; kept for provenance (it advects by the negative displacement, see Supplemental Section S1) |
+| `measurement/track_rods_piv_signcorrected.py` | PIV-guided rod tracking with the displacement sign corrected; the trajectories used in the paper. `--sign +1` reproduces the original trajectories exactly |
+| `measurement/track_rods_piv_roi.py` | PIV fields on the region-of-interest stack, the input of the band analysis |
+| `measurement/som_fullstack_morphometrics.py` | self-organizing-map decussation-band analysis (26 texture and 6 displacement features); the sign-corrected partition of the paper is produced by `scripts/som_signcheck.py` |
 | `scripts/_style_v2.py` | shared figure style (validated palette, Arial 6–9 pt, Cell Press widths) |
 | `scripts/make_fig*.py`, `make_figS*.py` | main-text Figures 2–7 and Supplemental figures |
 | `scripts/make_si_tables_v2.py` | Supplemental design-space and mesh tables |
@@ -30,7 +34,9 @@ scripts in [`../../scripts/`](../../scripts/):
 
 ## Layout and data
 
-The scripts were run from `<data root>/biomimetic_pipeline/manuscript/matter_v2/scripts/` and resolve
+The Noise2Inverse denoising and U-Net segmentation stages are not included; their code is available from the corresponding author on request. The measurement scripts start from the denoised, segmented slices and resolve their inputs relative to their own location, as in the authors' measurement folder (`som_fullstack_morphometrics.py` from a `som_approach/` subfolder next to `roi_imagestack_100/` and `output_piv_roi_back/`).
+
+The figure and check scripts were run from `<data root>/biomimetic_pipeline/manuscript/matter_v2/scripts/` and resolve
 every input relative to their own location: `MANU` (their parent folder), `BIO = MANU.parents[1]`
 (the folder holding `runs/`), and `REPO = MANU.parents[2]` (the folder holding the image-analysis
 outputs `output_piv/`, `output_piv_signcorrected/`, `output_validation_100/`, and
