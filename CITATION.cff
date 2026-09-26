@@ -28,8 +28,8 @@ keywords:
   - "Optuna"
 preferred-citation:
   type: article
-  title: "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices"
-  status: "in-preparation"
+  title: "Machine-Learning Translation of Tooth Enamel Microarchitecture into Additively Manufactured Lattices with Programmable Mechanics"
+  status: "submitted"
   year: 2026
   journal: "Matter"
   authors:

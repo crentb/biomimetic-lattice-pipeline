@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Analysis scripts used by the Matter manuscript: `scripts/analyze_load_paths.py`
+  (principal-stress trajectories, tension-dominated volume fraction, ring-resolved stresses,
+  platen rotation), `scripts/compute_robust_scf.py` and `scripts/compute_gauge_metrics.py`
+  (percentile stress ratio and gauge-window normalization), and
+  `scripts/estimate_contact_onset.py`.
+- Campaign drivers: `scripts/run_revision_compute_2026_09.py` (twist-scale study and mesh
+  convergence), `scripts/run_controls_2026_09.py` (alternating-handedness and
+  rotation-constrained-platen controls), and `scripts/run_inverse_design_2026_09.py`
+  (closed-loop Optuna TPE optimization through the full CAD-FEA pipeline, with a
+  per-trial jitter retry ladder for the CAD integrity gate).
+- `paper/matter_2026/`: figure, table, and check scripts of the manuscript, the TikZ sources of
+  Figure 1 and the graphical abstract, and `measurement/track_rods_piv_signcorrected.py`, which
+  advects rods by the true PIV displacement (`phase_cross_correlation(w1, w2)` returns its
+  negative).
+
+### Changed
+- `CITATION.cff`: preferred citation updated to the submitted manuscript title.
+
 ## [0.2.1] - 2026-09-23
 
 ### Changed
