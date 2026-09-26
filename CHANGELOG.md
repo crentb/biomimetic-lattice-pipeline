@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Figure 1 and the graphical abstract, and `measurement/track_rods_piv_signcorrected.py`, which
   advects rods by the true PIV displacement (`phase_cross_correlation(w1, w2)` returns its
   negative).
+- `paper/matter_2026/measurement/`: the authors' image-analysis stages used by the manuscript: rod instance
+  detection (`validate_stack_100.py`), PIV fields and the original tracking (`track_rods_piv.py`,
+  `track_rods_piv_roi.py`), and the self-organizing-map band analysis (`som_fullstack_morphometrics.py`).
 
 ### Changed
 - `CITATION.cff`: preferred citation updated to the submitted manuscript title.
