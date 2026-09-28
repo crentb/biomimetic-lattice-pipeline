@@ -115,6 +115,7 @@ Kelly, D.W., Tosh, M.W. (2000) Interpreting load paths and stress trajectories
 in elasticity. Eng. Comput. 17, 117-135. doi:10.1108/02644400010313084
 (DOIs verified against Crossref 2026-09-25.)
 """
+
 from __future__ import annotations
 
 import argparse

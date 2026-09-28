@@ -23,6 +23,7 @@ Outputs
 -------
 figures/panels/thumb_{watershed,piv,twin}.png
 """
+
 from __future__ import annotations
 
 import sys

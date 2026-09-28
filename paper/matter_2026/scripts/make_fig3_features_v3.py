@@ -31,6 +31,7 @@ Outputs
 -------
 figures/figure3_features.{pdf,png,tif}; data/fig3_features_values.json
 """
+
 from __future__ import annotations
 
 import json

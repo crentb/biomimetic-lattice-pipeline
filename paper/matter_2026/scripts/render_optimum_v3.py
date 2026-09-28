@@ -25,6 +25,7 @@ figures/panels/render_optimum.png; entry "optimum" in data/render_manifest.json
 
 Usage (conda base, from manuscript/matter_v2/):  python scripts/render_optimum_v3.py [--run-root inverse_design_v3]
 """
+
 from __future__ import annotations
 
 import argparse

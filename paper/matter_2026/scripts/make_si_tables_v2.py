@@ -19,6 +19,7 @@ Outputs
 -------
 data/si_table_arms.tex, data/si_table_twist.tex, data/si_table_mesh.tex
 """
+
 from __future__ import annotations
 
 import json

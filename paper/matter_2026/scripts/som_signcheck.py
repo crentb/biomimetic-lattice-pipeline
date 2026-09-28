@@ -29,6 +29,7 @@ data/_som_sandbox_signfix/...                  sandbox (script copy, figures, JS
 data/som_signcheck.json                        ARI and per-band statistics
 data/som_signcheck_bands.npz                   sign-corrected cluster map and fields
 """
+
 from __future__ import annotations
 
 import json

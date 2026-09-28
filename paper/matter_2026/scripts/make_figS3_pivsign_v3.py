@@ -32,6 +32,7 @@ Outputs
 -------
 figures/figureS3.{pdf,png,tif}; data/figS3_values.json
 """
+
 from __future__ import annotations
 
 import json

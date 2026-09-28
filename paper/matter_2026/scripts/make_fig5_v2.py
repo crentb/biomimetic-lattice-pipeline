@@ -57,6 +57,7 @@ Outputs
 -------
 figures/figure5.{pdf,png,tif}; data/fig5_values.json
 """
+
 from __future__ import annotations
 
 import json

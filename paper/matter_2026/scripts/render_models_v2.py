@@ -41,6 +41,7 @@ matter_v2/data/render_manifest.json          source path, bounds (mm or um),
 
 Side effects: read-only on runs/ and the parquet.
 """
+
 from __future__ import annotations
 
 import json

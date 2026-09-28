@@ -41,6 +41,7 @@ Side effects / notes
   scale; every reported quantity is a ratio.
 * Run after the other FEA campaigns (memory-bound; do not overlap).
 """
+
 from __future__ import annotations
 
 import json

@@ -48,6 +48,7 @@ runs/_load_path_analysis/contact_onset.csv   one row per run (others kept)
 
 Side effects: read-only on run directories.
 """
+
 from __future__ import annotations
 
 import argparse

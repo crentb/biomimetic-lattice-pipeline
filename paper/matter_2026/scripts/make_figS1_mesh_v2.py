@@ -24,6 +24,7 @@ Outputs
 -------
 figures/figureS1.{pdf,png,tif}; data/mesh_convergence.json
 """
+
 from __future__ import annotations
 
 import json

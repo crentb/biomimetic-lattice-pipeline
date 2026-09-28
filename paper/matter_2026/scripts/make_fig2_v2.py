@@ -48,6 +48,7 @@ matter_v2/data/fig2_values.json   every number printed on the figure
 
 Side effects: none outside matter_v2/.
 """
+
 from __future__ import annotations
 
 import json

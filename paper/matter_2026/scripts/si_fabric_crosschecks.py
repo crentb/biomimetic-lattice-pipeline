@@ -21,6 +21,7 @@ Outputs
 -------
 matter_v2/data/si_fabric_crosschecks.json
 """
+
 from __future__ import annotations
 
 import json

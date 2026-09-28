@@ -36,6 +36,7 @@ figures/figureS4.{pdf,png,tif}      optimization history (SI)
 
 Usage (conda base, from manuscript/matter_v2/):  python scripts/make_si_optimization_v3.py
 """
+
 from __future__ import annotations
 
 import argparse

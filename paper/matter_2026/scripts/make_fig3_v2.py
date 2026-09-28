@@ -33,6 +33,7 @@ Outputs
 -------
 figures/figure3.{pdf,png,tif}; data/fig3_values.json (every printed number)
 """
+
 from __future__ import annotations
 
 import json

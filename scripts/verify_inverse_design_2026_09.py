@@ -42,6 +42,7 @@ runs/_load_path_analysis/gauge_metrics.csv         rows added for both runs
 Usage (conda base, from biomimetic_pipeline/; run after the study finished):
     python scripts/verify_inverse_design_2026_09.py [--run-root inverse_design_v3] [--mesh-mm 0.5]
 """
+
 from __future__ import annotations
 
 import argparse

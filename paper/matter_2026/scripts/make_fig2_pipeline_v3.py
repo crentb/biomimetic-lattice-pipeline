@@ -38,6 +38,7 @@ figures/figure2_pipeline.{pdf,png,tif}; data/fig2_pipeline_values.json
 
 Side effects: none outside matter_v2/ (the pipeline script is only imported).
 """
+
 from __future__ import annotations
 
 import importlib.util

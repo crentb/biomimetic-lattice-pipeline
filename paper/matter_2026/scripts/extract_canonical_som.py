@@ -51,6 +51,7 @@ Side effects / non-obvious behaviour
 * Writes ~20 PNGs into the sandbox (discarded; not used by the paper).
 * Runtime ~5-15 min (SOM training + best-matching-unit search).
 """
+
 from __future__ import annotations
 
 import json

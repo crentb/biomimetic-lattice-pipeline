@@ -21,6 +21,7 @@ Outputs (figures/panels/thumb_*.png, 800 x 800 px, RGBA)
 
 Inputs: the same files as Figs. 2-6 (see those scripts).
 """
+
 from __future__ import annotations
 
 import sys

@@ -38,6 +38,7 @@ below the Cell Press 300-dpi guideline for photographs; replace
 photo_fdm_print_original.png with the original camera file (>= 1,000 px
 wide) and re-run this script -- no code change needed.
 """
+
 from __future__ import annotations
 
 import sys

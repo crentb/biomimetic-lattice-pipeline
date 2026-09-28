@@ -70,6 +70,7 @@ Side effects
   (reversible with gunzip; the VTK files hold the same fields) to bound disk use.
 * Run only when no other FEA campaign is running (memory-bound).
 """
+
 from __future__ import annotations
 
 import argparse

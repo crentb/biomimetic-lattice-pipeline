@@ -30,6 +30,7 @@ matter_v2/data/canonical_som_bands.npz   cluster_map in CANONICAL numbering +
                                          rod mask carried over unchanged
 matter_v2/data/canonical_som_bands_verification.json
 """
+
 from __future__ import annotations
 
 import itertools

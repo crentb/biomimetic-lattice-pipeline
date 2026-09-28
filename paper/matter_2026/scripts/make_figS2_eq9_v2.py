@@ -20,6 +20,7 @@ printable pairs are marked at their stiffness ratios (nominal moduli).
 Inputs: none (closed form).
 Outputs: figures/figureS2.{pdf,png,tif}
 """
+
 from __future__ import annotations
 
 import sys

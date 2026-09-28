@@ -28,6 +28,7 @@ runs/_load_path_analysis/robust_scf.csv   one row per run (replaced by key)
 
 Side effects: read-only on run directories.
 """
+
 from __future__ import annotations
 
 import argparse
