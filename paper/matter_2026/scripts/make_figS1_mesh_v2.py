@@ -115,7 +115,7 @@ def main() -> None:
         ("SCF", r"$\kappa_{99}$ (gauge P99/mean)"),
         ("tens", "tension-dominated fraction"),
         ("incl", "principal-stress inclination"),
-        ("rot", "top-plate rotation"),
+        ("rot", "platen rotation"),
     ]
     fig, ax = plt.subplots(figsize=(S.WIDTH_1COL, 62 * S.MM))
     for (k, lab), c, mk in zip(keys, S.CATEGORICAL + ["#6E6E6A"], "osD^v"):

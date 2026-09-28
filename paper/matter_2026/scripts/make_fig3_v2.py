@@ -215,7 +215,7 @@ def main() -> None:
     axB = ax_mm(96, 7, 74, 56)
     place_image(axB, PANELS / "render_lattice.png")
     axB.set_title(
-        "Bioinspired lattice (reference: N = 2, as mapped f = 1)",
+        "Printable lattice (reference: N = 2, as translated, f = 1)",
         fontsize=S.BASE_PT,
         pad=2,
         loc="left",
@@ -269,8 +269,8 @@ def main() -> None:
         ),
         (
             "twist scale f",
-            "1 (as mapped)",
-            f"checked against measured tilt: $W_1$ {vals['W1_f1_deg']:.1f}° (optimum f* = {f_star:.2f})",
+            "1",
+            f"as translated; vs measured tilt $W_1$ {vals['W1_f1_deg']:.1f}° (optimum f* = {f_star:.2f})",
             "verified",
         ),
         (
@@ -376,7 +376,7 @@ def main() -> None:
         where="post",
         color=S.NAVY_D,
         lw=1.2,
-        label=f"lattice as mapped, f = 1 ($W_1$ {vals['W1_f1_deg']:.1f}°)",
+        label=f"lattice as translated, f = 1 ($W_1$ {vals['W1_f1_deg']:.1f}°)",
     )
     # inset: 1-Wasserstein distance between lattice inclinations and measured tilt vs twist scale
     ins = axD.inset_axes([0.60, 0.30, 0.37, 0.30])
@@ -399,7 +399,9 @@ def main() -> None:
     axD.set_xlabel("rod inclination to loading axis (°)")
     axD.set_ylabel("cumulative fraction of rods")
     axD.set_xlim(0, 60)
-    axD.legend(loc="upper left", fontsize=5.6, handlelength=1.4)
+    axD.legend(
+        loc="lower right", fontsize=5.6, handlelength=1.4
+    )  # lower right is free of both curves
     S.recessive_grid(axD)
     axD.set_title("Geometric verification: inclination", fontsize=S.BASE_PT, pad=3, loc="left")
     label_mm("D", 110, 69)

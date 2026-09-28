@@ -14,6 +14,7 @@ scripts in [`../../scripts/`](../../scripts/):
 | `run_revision_compute_2026_09.py` | twist-scale study and mesh-convergence campaign |
 | `run_controls_2026_09.py` | alternating-handedness and rotation-constrained-platen controls |
 | `run_inverse_design_2026_09.py` | closed-loop Bayesian design optimization (Optuna TPE) through the full CAD–FEA pipeline |
+| `verify_inverse_design_2026_09.py` | re-evaluation of the selected design on the 0.5-mm production mesh |
 
 ## Contents
 
@@ -30,6 +31,7 @@ scripts in [`../../scripts/`](../../scripts/):
 | `scripts/si_measurement_checks.py`, `si_fabric_crosschecks.py` | tortuosity noise floor, band period, fabric axis, tracking fidelity, Woodcock fabric, clustering |
 | `scripts/extract_canonical_som.py`, `remap_canonical_som_labels.py`, `som_signcheck.py` | regeneration of the original SOM band map and the sign-corrected band partition |
 | `scripts/render_models_v2.py`, `make_thumbnails_v*.py` | off-screen renders of the digital twin and lattices; Figure 1 thumbnails |
+| `scripts/make_si_optimization_v3.py`, `render_optimum_v3.py` | optimization table, history figure, and summary values; render of the selected design (Figure 6I) |
 | `tikz/` | LaTeX/TikZ sources of Figure 1 and the graphical abstract |
 
 ## Layout and data

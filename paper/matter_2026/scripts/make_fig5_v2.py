@@ -22,6 +22,13 @@ trajectories the tilt-matched scale is f* = 1.03, i.e. the as-translated design,
 the separate f* band of v2 was removed; only the f = 1 reference line is drawn:
   D  E_app vs f.   E  tension-dominated volume fraction vs f.
   F  compression-twist coupling (platen rotation per 1 % strain) vs f.
+Row 3 (v3, 2026-09-26) -- closed-loop Bayesian optimization (Optuna TPE; each design
+built and solved by the full pipeline; run_inverse_design_2026_09.py):
+  G  objective J per trial and best-so-far envelope (random start-up shaded).
+  H  every evaluated design in the (E_app, tension-dominated fraction) plane with
+     the target set (E_app = E*, fraction >= t*), the twist study at the measured
+     diameter for context, and the selected design (search and 0.5-mm verification).
+  I  render of the selected design (render_optimum_v3.py) with its variables.
 Top strip: renders of the four corner designs (measured/densified x N = 4/9).
 
 Why this exists
@@ -43,6 +50,8 @@ runs/_load_path_analysis/gauge_metrics.csv           kappa_99 (gauge), phi_gauge
 runs/_load_path_analysis/robust_scf.csv              whole-model ratio (SI only)
 figures/panels/render_{bio,thick}_N{4,9}.png
 data/fig3_values.json                                f*
+runs/inverse_design_v3/trials.jsonl, best_verified.json   optimization (row 3)
+figures/panels/render_optimum.png                    selected design (row 3)
 
 Outputs
 -------
@@ -56,6 +65,7 @@ import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -86,6 +96,20 @@ def robust_scf() -> dict:
 def gauge() -> pd.DataFrame:
     """run -> gauge-window kappa_99 and gauge solid fraction (compute_gauge_metrics.py)."""
     return pd.read_csv(LPA / "gauge_metrics.csv").set_index("run")
+
+
+OPT_ROOT = RUNS / "inverse_design_v3"
+OPT_STARTUP = 6  # random start-up trials of the TPE sampler (driver default)
+
+
+def optimization_record() -> dict | None:
+    """Trials of the closed-loop study and the 0.5-mm verification of the best design (if run)."""
+    log = OPT_ROOT / "trials.jsonl"
+    if not log.exists():
+        return None
+    trials = [json.loads(x) for x in log.read_text().splitlines() if x.strip()]
+    ver = OPT_ROOT / "best_verified.json"
+    return {"trials": trials, "verified": json.loads(ver.read_text()) if ver.exists() else None}
 
 
 def decussation_table() -> pd.DataFrame:
@@ -177,7 +201,7 @@ def main() -> None:
     vals["decussation"] = dec.drop(columns=["run"]).round(4).to_dict("records")
     vals["f_star"] = fstar
 
-    FW, FH = 174.0, 150.0
+    FW, FH = 174.0, 212.0
     fig = plt.figure(figsize=(FW * S.MM, FH * S.MM))
 
     def ax_mm(x, y, w, h, **kw):
@@ -289,6 +313,169 @@ def main() -> None:
     axF = ax_mm(128, y2, 42, h2)
     dec_line(axF, "rot", "platen rotation (° per 1 % strain)")
     label_mm("F", 117, y2 - 4)
+
+    # --- row 3: closed-loop Bayesian optimization toward a target response -------------------
+    opt = optimization_record()
+    if opt is not None:
+        y3, h3 = 158, 42
+        trials = opt["trials"]
+        ok = [t for t in trials if t.get("state") == "ok"]
+        e_star, t_star = trials[0]["targets"]["E_app"], trials[0]["targets"]["tension"]
+        best = min(ok, key=lambda t: t["J"])
+        ver = opt["verified"]
+
+        # G -- objective per trial (log scale) and best-so-far envelope
+        axG = ax_mm(12, y3, 44, h3)
+        idx = np.array([t["trial"] for t in trials])
+        J = np.array([t["J"] for t in trials])
+        okm = np.array([t.get("state") == "ok" for t in trials])
+        axG.axvspan(-0.5, OPT_STARTUP - 0.5, color=S.TONE, alpha=0.45, lw=0, zorder=0)
+        axG.plot(idx[okm], J[okm], "o", ms=3.2, color=S.NAVY_D, mec="white", mew=0.5)
+        axG.step(
+            idx,
+            np.minimum.accumulate(np.where(okm, J, np.inf)),
+            where="post",
+            color=S.GOLD_D,
+            lw=1.2,
+        )
+        axG.set_yscale("log")
+        axG.yaxis.set_major_locator(mticker.LogLocator(base=10, subs=(1.0, 2.0, 5.0)))
+        axG.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:g}"))
+        axG.yaxis.set_minor_formatter(mticker.NullFormatter())
+        axG.set_xlabel("design evaluated (trial)")
+        axG.set_ylabel("objective J")
+        axG.text(
+            0.97,
+            0.95,
+            "best so far",
+            transform=axG.transAxes,
+            ha="right",
+            va="top",
+            color=S.GOLD_D,
+            fontsize=5.6,
+        )
+        S.recessive_grid(axG)
+        label_mm("G", 1, y3 - 4)
+
+        # H -- property plane: evaluated designs, target set, and the twist study for context
+        axH = ax_mm(70, y3, 44, h3)
+        m = np.isfinite(dec["E_app"]) & np.isfinite(dec["tens"])
+        axH.plot(dec.E_app[m], dec.tens[m], "-", color=S.RULE, lw=0.7, zorder=1)
+        axH.plot(
+            dec.E_app[m],
+            dec.tens[m],
+            "o",
+            ms=2.2,
+            color=S.RULE,
+            zorder=1,
+            label="twist study (d = 2.13 mm, N = 2)",
+        )
+        alt = np.array([t["handedness"] == "alternating" for t in ok])
+        E = np.array([t["E_app"] for t in ok])
+        T = np.array([t["tension"] for t in ok])
+        axH.plot(
+            E[~alt],
+            T[~alt],
+            "o",
+            ms=3.4,
+            color=S.NAVY_D,
+            mec="white",
+            mew=0.5,
+            zorder=3,
+            label="optimizer, single handedness",
+        )
+        if alt.any():
+            axH.plot(
+                E[alt],
+                T[alt],
+                "o",
+                ms=3.4,
+                mfc="white",
+                mec=S.NAVY_D,
+                mew=0.8,
+                zorder=3,
+                label="optimizer, alternating",
+            )
+        top = max(0.40, float(np.nanmax(np.r_[T, dec.tens[m]])) * 1.08)
+        axH.plot(
+            [e_star, e_star],
+            [t_star, top],
+            color=S.GOLD_D,
+            lw=2.4,
+            alpha=0.55,
+            solid_capstyle="butt",
+            zorder=2,
+            label="target set",
+        )
+        axH.plot(
+            best["E_app"],
+            best["tension"],
+            "*",
+            ms=8,
+            color=S.GOLD_D,
+            mec="white",
+            mew=0.5,
+            zorder=4,
+            label="selected design",
+        )
+        if ver is not None:
+            v = ver["verified"]
+            axH.plot(
+                v["E_app"],
+                v["tension"],
+                "*",
+                ms=8,
+                mfc="none",
+                mec=S.INK,
+                mew=0.6,
+                zorder=5,
+                label="selected, 0.5-mm mesh",
+            )
+        axH.set_ylim(0, top)
+        axH.set_xlabel(r"apparent modulus $E_{app}$ (MPa)")
+        axH.set_ylabel("tension-dominated volume fraction")
+        axH.legend(fontsize=5.0, loc="upper right", handlelength=1.2, borderaxespad=0.3)
+        S.recessive_grid(axH)
+        label_mm("H", 59, y3 - 4)
+
+        # I -- the selected design: render (same recipe as the top strip) and its variables
+        rpng = MANU / "figures/panels/render_optimum.png"
+        axI = ax_mm(122, y3 - 2, 48, h3 - 8)
+        axI.axis("off")
+        if rpng.exists():
+            a = np.asarray(Image.open(rpng).convert("RGBA"))
+            ys, xs = np.where(a[..., 3] > 10)
+            axI.imshow(a[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1])
+        src = ver["verified"] if ver is not None else best
+        hand = "alternating" if best["handedness"] == "alternating" else "single"
+        fig.text(
+            146 / FW,
+            1 - (y3 + h3 - 4) / FH,
+            f"f = {best['f']:.2f}, N = {best['N']}, d = {best['d']:.2f} mm, {hand} handedness\n"
+            f"$E_{{app}}$ = {src['E_app']:.0f} MPa (target {e_star:.0f})\n"
+            f"tension-dominated fraction {src['tension']:.2f} (target ≥ {t_star:.2f})",
+            ha="center",
+            va="top",
+            fontsize=5.6,
+            color=S.INK,
+        )
+        label_mm("I", 117, y3 - 4)
+        vals["optimization"] = {
+            "n_trials": len(trials),
+            "n_ok": len(ok),
+            "best": best,
+            "verified": ver["verified"] if ver is not None else None,
+        }
+        fig.text(
+            6 / FW,
+            1 - 148.5 / FH,
+            f"Closed-loop Bayesian optimization toward a target response "
+            f"($E_{{app}}$ = {e_star:.0f} MPa, tension-dominated fraction ≥ {t_star:.2f}; H = 20 mm)",
+            fontsize=S.BASE_PT,
+            fontweight="bold",
+            color=S.INK,
+            va="top",
+        )
 
     fig.text(
         6 / FW,

@@ -1,5 +1,5 @@
 %% ============================================================================
-%% graphical_abstract.tex -- graphical abstract for the Matter v2 submission
+%% graphical_abstract.tex -- graphical abstract for the Matter submission (v3, 2026-09-26)
 %%
 %% Purpose : square, single-panel summary that reads clockwise from the
 %%           measured enamel to the printed lattice. Replaces the v1 image,
@@ -7,9 +7,11 @@
 %%           (not permitted by Cell Press for graphical abstracts) and showed
 %%           a lattice that was never made.
 %% Content : every image is the paper's own data (figures/panels/thumb_*.png):
-%%           measured rod trajectories -> SOM architectural descriptor ->
-%%           tilt-calibrated bioinspired lattice -> tension/compression load
-%%           partition under compression, with the FDM print as an inset.
+%%           measured rod trajectories (deep learning + PIV tracking) ->
+%%           morphometric descriptor (sign-corrected SOM bands) -> schema-
+%%           validated translation into a printable lattice -> FEA and
+%%           Bayesian optimization (programmable mechanics), with the FFF
+%%           print as an inset.
 %% Build   : pdflatex graphical_abstract.tex
 %%           pdftoppm -png -r 254 -singlefile graphical_abstract.pdf ../graphical_abstract
 %%           (12 cm square at 254 dpi = 1,200 x 1,200 px, the Cell Press size)
@@ -52,9 +54,9 @@
 \bigthumb{\xl}{\yb}{thumb_fea.png}
 
 \node[lbl] at (\xl,10.95) {Measured enamel rods};
-\node[lbl] at (\xr,10.95) {Architectural descriptor};
-\node[lbl] at (\xr,0.85) {Bioinspired lattice};
-\node[lbl] at (\xl,0.75) {Tension--compression\\[-1pt]load partition};
+\node[lbl] at (\xr,10.95) {Morphometric descriptor};
+\node[lbl] at (\xr,0.85) {Printable lattice};
+\node[lbl] at (\xl,0.85) {Programmable mechanics};
 
 % clockwise flow
 \draw[flow] (\xl+2.05,\yt) -- (\xr-2.05,\yt);
@@ -62,10 +64,10 @@
 \draw[flow] (\xr-2.05,\yb) -- (\xl+2.05,\yb);
 
 % step annotations (minimal text)
-\node[text=phase, font=\fontsize{7.5}{8.5}\selectfont, anchor=south, align=center] at (6,\yt+0.12) {fabric analysis\\(SOM, PIV)};
+\node[text=phase, font=\fontsize{7.5}{8.5}\selectfont, anchor=south, align=center] at (6,\yt+0.12) {deep learning,\\PIV tracking};
 \node[text=phase, font=\fontsize{7.5}{8.5}\selectfont, anchor=east, align=right] at (\xr-0.2,5.85)
-  {feature-to-CAD\\tilt-calibrated};
-\node[text=phase, font=\fontsize{7.5}{8.5}\selectfont, anchor=north, align=center] at (6,\yb-0.12) {linear-elastic\\FEA};
+  {schema-validated\\translation};
+\node[text=phase, font=\fontsize{7.5}{8.5}\selectfont, anchor=north, align=center] at (6,\yb-0.12) {FEA + Bayesian\\optimization};
 
 % printed prototype inset, beside the lattice
 \begin{scope}
@@ -73,7 +75,7 @@
   \node at (5.65,5.85) {\includegraphics[width=2.2cm]{../panels/thumb_print.png}};
 \end{scope}
 \draw[gold, line width=1.2pt, rounded corners=3pt] (4.55,4.75) rectangle (6.75,6.95);
-\node[text=phase, font=\fontsize{7.5}{9}\selectfont, anchor=north] at (5.65,4.68) {printed (FDM)};
+\node[text=phase, font=\fontsize{7.5}{9}\selectfont, anchor=north] at (5.65,4.68) {printed (FFF)};
 \draw[gold, line width=1.0pt, dash pattern=on 3pt off 2pt, -{Stealth[length=6pt,width=5pt]}]
   (\xr-1.45,\yb+1.3) -- (6.85,5.25);
 \end{tikzpicture}

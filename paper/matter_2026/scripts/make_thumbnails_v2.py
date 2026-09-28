@@ -14,7 +14,7 @@ vector schematic shows only real results.
 Outputs (figures/panels/thumb_*.png, 800 x 800 px, RGBA)
   thumb_ct      U-Net segmentation of slice 51, ~70 um field
   thumb_tracks  60-um column of the digital twin (render_twin_crop.png)
-  thumb_som     canonical SOM bands with displacement streamlines, ~150 um field
+  thumb_som     sign-corrected SOM bands (as in Figure 3) with displacement streamlines, ~150 um field
   thumb_cad     reference lattice render (render_lattice.png)
   thumb_fea     signed dominant principal stress, mid-gauge section
   thumb_print   the FDM print photograph, square crop (no enhancement)
@@ -76,7 +76,9 @@ def main() -> None:
     square_png(trimmed(PANELS / "render_twin_crop.png"), PANELS / "thumb_tracks.png")
 
     # --- 3. SOM bands + streamlines crop (~150 um) ------------------------------------
-    z = np.load(MANU / "data/canonical_som_bands.npz")
+    z = np.load(
+        MANU / "data/som_signcheck_bands.npz"
+    )  # sign-corrected partition (som_signcheck.py), as in Fig. 3
     lab, dx, dy = z["cluster_map"], z["accum_dx_sm"], z["accum_dy_sm"]
     s0, n = 200, int(150 / (20 / 58))
     sl = (slice(s0, s0 + n), slice(s0 + 60, s0 + 60 + n))

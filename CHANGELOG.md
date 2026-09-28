@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   rotation-constrained-platen controls), and `scripts/run_inverse_design_2026_09.py`
   (closed-loop Optuna TPE optimization through the full CAD-FEA pipeline, with a
   per-trial jitter retry ladder for the CAD integrity gate).
+- `scripts/verify_inverse_design_2026_09.py`: re-evaluates the selected design of the optimization on the
+  0.5-mm production mesh and reports the change from the search mesh.
 - `paper/matter_2026/`: figure, table, and check scripts of the manuscript, the TikZ sources of
   Figure 1 and the graphical abstract, and `measurement/track_rods_piv_signcorrected.py`, which
   advects rods by the true PIV displacement (`phase_cross_correlation(w1, w2)` returns its

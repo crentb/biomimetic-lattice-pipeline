@@ -268,7 +268,7 @@ def main() -> None:
             "sweep_decussation_dense_v3__trial_011_decussation_0p55",
             S.TEAL_D,
         ),
-        ("as mapped, f = 1.0", REF, "live_001_digital_twin_v2", S.NAVY_D),
+        ("as translated, f = 1.0", REF, "live_001_digital_twin_v2", S.NAVY_D),
     ]
     bw = 0.26
     axD.axhline(0, color=S.RULE, lw=0.5)
@@ -348,9 +348,9 @@ def main() -> None:
     axE.set_xlabel("x (mm)")
     axE.set_ylabel("y (mm)")
     rot = ref["top_plate"]["rotation_deg_per_pct_strain"]
-    # True minus sign on the number only (the hyphen in "Top-plate" must stay a hyphen).
+    # True minus sign on the number only.
     axE.set_title(
-        "Top-plate rotation\n" + f"{rot:+.2f}".replace("-", "\u2212") + "° per 1 % strain",
+        "Platen rotation\n" + f"{rot:+.2f}".replace("-", "\u2212") + "° per 1 % strain",
         fontsize=S.BASE_PT,
         pad=2,
     )
@@ -368,9 +368,9 @@ def main() -> None:
             "#B4B4B0",
             CTRL,
         ),
-        ("reference\n(f = 1, one handedness)", "live_001_digital_twin_v2", S.NAVY_D, REF),
+        ("reference\n(f = 1, single handedness)", "live_001_digital_twin_v2", S.NAVY_D, REF),
         ("alternating\nhandedness", "control_achiral_v1__trial_000_alternating", S.GOLD_D, ACHIRAL),
-        ("non-rotating\ntop platen", "control_platen_fixed_v1", S.WINE_D, PLATEN),
+        ("rotation-\nconstrained platen", "control_platen_fixed_v1", S.WINE_D, PLATEN),
     ]
     # Apparent modulus of each control from its axial stiffness F/delta: all four
     # share the reference footprint and height, so E_app scales with F/delta.
