@@ -1,0 +1,154 @@
+%% ============================================================================
+%% Figure 1 (v3): end-to-end pipeline from synchrotron tomography to additively
+%% manufactured lattices -- two tiers joined by the data-contract layer.
+%% Author  : Cameron B. Renteria
+%% Purpose : Replaces the six-stage v2 schematic with the eleven stages of the
+%%           pipeline as described in the v3 manuscript (Results 2.1, Table 1):
+%%           MEASUREMENT  projections -> Noise2Inverse denoising -> U-Net
+%%                        segmentation -> watershed rod detection -> PIV
+%%                        tracking -> morphometric features
+%%           TRANSLATION  feature-to-CAD -> FEA -> design optimization ->
+%%                        digital twin -> additive manufacturing
+%%           The tiers exchange only schema-validated JSON contracts with
+%%           recorded provenance (centre band).
+%% Images  : every ring holds a crop of this study's data
+%%           (figures/panels/thumb_*.png from make_thumbnails_v2.py and
+%%           make_thumbnails_v3.py). The first two rings (projections,
+%%           denoising) are vector glyphs, not data: the raw lion
+%%           reconstructions are not part of this repository.
+%% Build   : (from figures/src/)
+%%           pdflatex figure1_pipeline_v3.tex
+%%           cp figure1_pipeline_v3.pdf ../figure1.pdf
+%%           pdftoppm -png -r 600 -singlefile figure1_pipeline_v3.pdf ../figure1
+%% Output  : 17.4 cm x 10.8 cm vector PDF (Cell Press double-column width).
+%% ============================================================================
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[letterspace=80]{microtype}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta,calc}
+\pdfinfo{/Title (Figure 1: tomography-to-manufacturing pipeline) /Author (Cameron B. Renteria)}
+
+% ---- palette (identical to the repository schematics and the v2 figures) -----
+\definecolor{navy}{HTML}{1E3252}
+\definecolor{gold}{HTML}{B8894A}
+\definecolor{ink}{HTML}{222222}
+\definecolor{phase}{HTML}{6E6E6A}
+\definecolor{rule}{HTML}{8C8C8C}
+\definecolor{band}{HTML}{E8ECF3}
+
+\tikzset{
+  stage/.style = {fill=navy, rounded corners=3.5pt, minimum width=2.5cm, minimum height=0.84cm,
+                  text=white, align=center, font=\fontsize{7.9}{9.0}\selectfont\bfseries, inner sep=1pt},
+  ring/.style  = {draw=gold, line width=1.2pt, circle, minimum size=1.86cm},
+  capt/.style  = {text=ink, align=center, anchor=north, text width=2.7cm,
+                  font=\fontsize{6.3}{7.6}\selectfont},
+  flow/.style  = {-{Stealth[length=4.6pt,width=4.2pt]}, line width=0.95pt, draw=navy},
+  phaselbl/.style = {text=phase, font=\fontsize{6.9}{8}\selectfont},
+}
+% Real-data thumbnail #3 clipped to a circle at (#1,#2), gold ring on top.
+\newcommand{\thumb}[3]{%
+  \begin{scope}
+    \clip (#1,#2) circle (0.9);
+    \node at (#1,#2) {\includegraphics[width=1.85cm]{../panels/#3}};
+  \end{scope}
+  \node[ring] at (#1,#2) {};}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\fill[white] (0,0) rectangle (17.4,10.8);
+
+% ============================ MEASUREMENT TIER ============================
+\def\yT{8.85}\def\yTb{7.25}\def\yTc{6.73}
+\def\ta{1.45}\def\tb{4.35}\def\tc{7.25}\def\td{10.15}\def\te{13.05}\def\tf{15.95}
+\draw[rule, line width=0.6pt] (0.2,10.16) -- (0.2,10.3) -- (17.2,10.3) -- (17.2,10.16);
+\node[phaselbl] at (8.7,10.58) {\textls{MEASUREMENT: FROM TOMOGRAPHIC PROJECTIONS TO MORPHOMETRIC FEATURES}};
+
+% -- ring 1: projections (vector glyph: beam -> sample -> detector) --------------
+\begin{scope}
+  \clip (\ta,\yT) circle (0.9);
+  \fill[white] (\ta,\yT) circle (0.9);
+  \foreach \dy in {-0.28,0,0.28} \draw[navy!70, line width=0.7pt, -{Stealth[length=2.6pt]}]
+      (\ta-0.85,\yT+\dy) -- (\ta-0.28,\yT+\dy);
+  \fill[gold!85] (\ta-0.22,\yT-0.2) rectangle (\ta+0.1,\yT+0.2);
+  \shade[left color=rule!35, right color=rule!85] (\ta+0.38,\yT-0.55) rectangle (\ta+0.52,\yT+0.55);
+  \foreach \dy in {-0.3,0.0,0.3} \draw[navy!45, line width=0.5pt, dashed] (\ta+0.1,\yT+0.6*\dy) -- (\ta+0.38,\yT+\dy);
+\end{scope}
+\node[ring] at (\ta,\yT) {};
+
+% -- ring 2: self-supervised denoising (vector glyph: noisy -> clean) -------------
+\begin{scope}
+  \clip (\tb,\yT) circle (0.9);
+  \fill[white] (\tb,\yT) circle (0.9);
+  \pgfmathsetseed{17}
+  \fill[rule!25] (\tb-0.72,\yT-0.34) rectangle (\tb-0.08,\yT+0.34);
+  \foreach \k in {1,...,90} {\pgfmathsetmacro{\px}{\tb-0.72+0.64*rnd}\pgfmathsetmacro{\py}{\yT-0.34+0.68*rnd}
+    \fill[navy!60] (\px,\py) circle (0.018);}
+  \draw[navy, line width=0.8pt, -{Stealth[length=3pt]}] (\tb-0.05,\yT) -- (\tb+0.13,\yT);
+  \shade[left color=rule!20, right color=navy!45] (\tb+0.16,\yT-0.34) rectangle (\tb+0.72,\yT+0.34);
+\end{scope}
+\node[ring] at (\tb,\yT) {};
+
+\thumb{\tc}{\yT}{thumb_ct.png}
+\thumb{\td}{\yT}{thumb_watershed.png}
+\thumb{\te}{\yT}{thumb_piv.png}
+\thumb{\tf}{\yT}{thumb_som.png}
+
+\node[stage] (t1) at (\ta,\yTb) {Synchrotron\\microCT};
+\node[stage] (t2) at (\tb,\yTb) {Self-supervised\\denoising};
+\node[stage] (t3) at (\tc,\yTb) {Deep-learning\\segmentation};
+\node[stage] (t4) at (\td,\yTb) {Rod\\detection};
+\node[stage] (t5) at (\te,\yTb) {PIV\\tracking};
+\node[stage] (t6) at (\tf,\yTb) {Morphometric\\features};
+\foreach \a/\b in {t1/t2,t2/t3,t3/t4,t4/t5,t5/t6} \draw[flow] (\a.east) -- (\b.west);
+
+\node[capt] at (\ta,\yTc) {ALS 8.3.2, 25 keV\\0.345\,µm voxels};
+\node[capt] at (\tb,\yTc) {2.5D Noise2Inverse\\even/odd projections};
+\node[capt] at (\tc,\yTc) {2D U-Net\\Dice 0.967};
+\node[capt] at (\td,\yTc) {distance-transform watershed\\+ acceptance criteria};
+\node[capt] at (\te,\yTc) {2,433 trajectories\\through 101 slices};
+\node[capt] at (\tf,\yTc) {tilt, pitch, tortuosity\\decussation bands, period};
+
+% ============================ DATA-CONTRACT LAYER ============================
+\fill[band, rounded corners=4pt] (0.2,5.08) rectangle (17.2,5.88);
+\node[text=navy, font=\fontsize{7.0}{8.6}\selectfont\bfseries, align=center] at (8.7,5.48)
+  {Schema-validated JSON data contracts \enspace$\cdot$\enspace input hashes, parameters, and software environment recorded for every run\\
+   containerized, continuously integrated open-source software};
+% flow: down the right margin into the contract layer, across, and down the left margin
+\draw[flow] (17.02,\yTb) -- (17.3,\yTb) -- (17.3,5.88);
+\draw[flow] (0.1,5.08) -- (0.1,3.52) -- (0.53,3.52);
+
+% ============================ TRANSLATION TIER ============================
+\def\yB{3.55}\def\yBb{1.96}\def\yBc{1.44}
+\def\ba{1.8}\def\bb{5.2}\def\bc{8.6}\def\bd{12.0}\def\be{15.4}
+\node[phaselbl] at (8.7,4.83) {\textls{TRANSLATION: FROM DESIGN PARAMETERS TO PRINTED LATTICES}};
+
+\thumb{\ba}{\yB}{thumb_cad.png}
+\thumb{\bb}{\yB}{thumb_fea.png}
+\thumb{\bc}{\yB}{thumb_design.png}
+\thumb{\bd}{\yB}{thumb_twin.png}
+\thumb{\be}{\yB}{thumb_print.png}
+
+\node[stage] (b1) at (\ba,\yBb) {Feature-to-CAD\\translation};
+\node[stage] (b2) at (\bb,\yBb) {Finite-element\\analysis};
+\node[stage] (b3) at (\bc,\yBb) {Design\\optimization};
+\node[stage] (b4) at (\bd,\yBb) {Rod-resolved\\digital twin};
+\node[stage] (b5) at (\be,\yBb) {Additive\\manufacturing};
+\foreach \a/\b in {b1/b2,b2/b3,b3/b4,b4/b5} \draw[flow] (\a.east) -- (\b.west);
+
+\node[capt] at (\ba,\yBc) {traceability matrix\\tilt calibration};
+\node[capt] at (\bb,\yBc) {stiffness, $\kappa_{99}$,\\load partitioning};
+\node[capt] at (\bc,\yBc) {parameter sweeps and\\Bayesian closed loop};
+\node[capt] at (\bd,\yBc) {2,433 rods at\\measured diameter};
+\node[capt] at (\be,\yBc) {fused deposition\\modeling (PLA)};
+
+% ---- closed design loop: optimization -> CAD (beneath the captions) ---------------
+\draw[gold, line width=0.95pt, dash pattern=on 3.0pt off 2.0pt, -{Stealth[length=4.6pt,width=4.2pt]}]
+  (\bc,0.78) -- (\bc,0.42) -- (\ba,0.42) -- (\ba,0.78);
+\node[text=gold, font=\fontsize{6.6}{7.8}\selectfont\itshape, anchor=north] at ({(\ba+\bc)/2},0.36)
+  {closed loop: rod diameter, bridge layers, twist amplitude, handedness};
+\end{tikzpicture}
+\end{document}
