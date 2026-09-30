@@ -21,7 +21,7 @@ description     = "Micro-CT-driven generation of biomimetic enamel lattices with
 readme          = "README.md"
 requires-python = ">=3.10"
 license         = { text = "Apache-2.0" }
-authors         = [{ name = "Cameron B. Renteria", email = "crentb@uw.edu" }]
+authors         = [{ name = "Cameron B. Renteria", email = "crentb23@gmail.com" }]
 keywords = [
     "bioinspired design", "biomimetic materials", "tooth enamel",
     "finite element analysis", "parametric CAD", "design optimization",
