@@ -12,11 +12,11 @@ From synchrotron micro-computed tomography (micro-CT) of tooth enamel to biomime
 
 The pipeline turns measured three-dimensional rod geometry from synchrotron micro-CT of tooth enamel into **parametric CAD lattices**, runs **linear-elastic FEA** on them, scores the results against pluggable **objectives**, and can drive a **closed-loop Optuna optimization** over the manufacturability-constrained design space. Every run emits a metrics JSON and a LaTeX/PDF report.
 
-**Associated manuscript:** C. B. Renteria, J. R. Grimm, A. Yunker, D. Y. Parkinson, D. D. Arola, "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices," *Matter* (in preparation).
+**Associated manuscript:** C. B. Renteria, J. R. Grimm, A. Yunker, D. Y. Parkinson, D. D. Arola, "Machine Learning-Accelerated Translation of Enamel Microarchitecture from Synchrotron Imaging to Additively Manufactured Lattices," *Matter* (in preparation).
 
 ## Architecture
 
-![Pipeline architecture](https://raw.githubusercontent.com/crentb/biomimetic-lattice-pipeline/main/docs/figures/01_architecture.png)
+![Pipeline architecture: measurement streams (SOM bands, HSB angles, PIV tracks, rod tracking, slice rods, smoothed 3D) are merged into one schema-checked morphometrics.json, mapped to CAD parameters, built and meshed, solved with FEA, and scored by pluggable objectives with a report for every run; an Optuna closed loop suggests new CAD parameters and reverse-maps the best designs to biology](https://raw.githubusercontent.com/crentb/biomimetic-lattice-pipeline/main/docs/figures/architecture.png)
 
 A single canonical `morphometrics.json` is the only coupling point between stages, so each component can be replaced independently, and a JSON Schema contract is validated at every seam. The one-page end-to-end schematic, with the module behind each stage, is in [docs/biomimetic_pipeline_schematic.pdf](https://github.com/crentb/biomimetic-lattice-pipeline/blob/main/docs/biomimetic_pipeline_schematic.pdf).
 

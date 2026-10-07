@@ -28,7 +28,7 @@ keywords:
   - "Optuna"
 preferred-citation:
   type: article
-  title: "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices"
+  title: "Machine Learning-Accelerated Translation of Enamel Microarchitecture from Synchrotron Imaging to Additively Manufactured Lattices"
   status: "in-preparation"
   year: 2026
   journal: "Matter"
@@ -36,10 +36,10 @@ preferred-citation:
     - family-names: "Renteria"
       given-names: "Cameron B."
     - family-names: "Grimm"
-      given-names: "J. R."
+      given-names: "Jack R."
     - family-names: "Yunker"
-      given-names: "A."
+      given-names: "Austin"
     - family-names: "Parkinson"
-      given-names: "D. Y."
+      given-names: "Dilworth Y."
     - family-names: "Arola"
-      given-names: "D. D."
+      given-names: "Dwayne D."
