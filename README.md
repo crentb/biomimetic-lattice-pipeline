@@ -12,7 +12,7 @@ From synchrotron micro-computed tomography (micro-CT) of tooth enamel to biomime
 
 The pipeline turns measured three-dimensional rod geometry from synchrotron micro-CT of tooth enamel into **parametric CAD lattices**, runs **linear-elastic FEA** on them, scores the results against pluggable **objectives**, and can drive a **closed-loop Optuna optimization** over the manufacturability-constrained design space. Every run emits a metrics JSON and a LaTeX/PDF report.
 
-**Associated manuscript:** C. B. Renteria, J. R. Grimm, A. Yunker, D. Y. Parkinson, D. D. Arola, "Translating Helically Decussated Enamel into Damage-Tolerant Bioinspired Lattices," *Matter* (in preparation).
+**Associated manuscript:** C. B. Renteria, J. R. Grimm, A. Yunker, D. Y. Parkinson, D. D. Arola, "Machine Learning-Accelerated Translation of Enamel Microarchitecture from Synchrotron Imaging to Additively Manufactured Lattices," *Matter* (in preparation).
 
 ## Architecture
 
