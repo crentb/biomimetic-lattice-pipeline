@@ -4,14 +4,14 @@
 repos:
   # Ruff: lint (with safe auto-fixes). Matches the CI `ruff check .` gate.
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.8
+    rev: v0.17.3
     hooks:
       - id: ruff
         args: [--fix]
 
   # Black: the single source of truth for formatting. Matches `black --check .`.
   - repo: https://github.com/psf/black
-    rev: 26.5.1
+    rev: 26.10.1
     hooks:
       - id: black
 
